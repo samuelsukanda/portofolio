@@ -36,6 +36,15 @@ export function Nav() {
   }, [])
 
   useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false)
+    }
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [open])
+
+  useEffect(() => {
     const updateActive = () => {
       const probe = window.scrollY + window.innerHeight * 0.4
       let current = ""

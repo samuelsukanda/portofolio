@@ -430,7 +430,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
   const hasSlides = project.screenshots.length > 1
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" data-lenis-prevent>
       <motion.div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
@@ -635,6 +635,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         {zoomed && (
           <motion.div
             className="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 p-4"
+            data-lenis-prevent
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

@@ -6,7 +6,6 @@ import {
   GithubLogo,
   LinkedinLogo,
   Check,
-  Copy,
   PaperPlaneTilt,
   SpinnerGap,
   WarningCircle,
@@ -15,6 +14,7 @@ import { profile } from "../lib/data"
 import { contactForm } from "../lib/config"
 import { useLang } from "../lib/i18n"
 import { SectionHeading } from "./SectionHeading"
+import { Tooltip } from "./Tooltip"
 
 type Status = "idle" | "loading" | "success" | "error"
 
@@ -163,16 +163,22 @@ export function Contact() {
               {channels.map((c) => {
                 const Icon = c.icon
                 const isEmail = c.url.startsWith("mailto:")
-                return (
-                  <div key={c.label} className="relative">
-                    <a
-                      href={c.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group flex items-center gap-3 rounded-card border border-line bg-surface p-4 pr-12 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-md"
+                const cardCls =
+                  "group flex items-center gap-3 rounded-card border border-line bg-surface p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-md"
+                return isEmail ? (
+                  <Tooltip key={c.label} label={t.contact.copyEmail} className="w-full">
+                    <button
+                      type="button"
+                      onClick={handleCopy}
+                      aria-label={copied ? t.contact.emailCopied : t.contact.copyEmail}
+                      className={`${cardCls} w-full text-left`}
                     >
                       <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-surface-2 text-ink transition-colors group-hover:text-accent">
-                        <Icon size={20} weight="bold" />
+                        {copied ? (
+                          <Check size={20} weight="bold" className="text-emerald-500" />
+                        ) : (
+                          <Icon size={20} weight="bold" />
+                        )}
                       </span>
                       <span>
                         <span className="block font-mono text-[11px] uppercase tracking-wider text-ink-3">
@@ -182,23 +188,28 @@ export function Contact() {
                           {c.value}
                         </span>
                       </span>
-                    </a>
-                    {isEmail && (
-                      <button
-                        type="button"
-                        onClick={handleCopy}
-                        aria-label={copied ? t.contact.emailCopied : t.contact.copyEmail}
-                        title={t.contact.copyEmail}
-                        className="absolute right-3 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-line text-ink-2 transition-colors hover:border-accent hover:text-accent"
-                      >
-                        {copied ? (
-                          <Check size={14} weight="bold" className="text-emerald-500" />
-                        ) : (
-                          <Copy size={14} weight="bold" />
-                        )}
-                      </button>
-                    )}
-                  </div>
+                    </button>
+                  </Tooltip>
+                ) : (
+                  <a
+                    key={c.label}
+                    href={c.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`${cardCls} w-full`}
+                  >
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-surface-2 text-ink transition-colors group-hover:text-accent">
+                      <Icon size={20} weight="bold" />
+                    </span>
+                    <span>
+                      <span className="block font-mono text-[11px] uppercase tracking-wider text-ink-3">
+                        {c.label}
+                      </span>
+                      <span className="block truncate text-sm font-medium text-ink">
+                        {c.value}
+                      </span>
+                    </span>
+                  </a>
                 )
               })}
             </div>
@@ -277,7 +288,7 @@ export function Contact() {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="group mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-medium text-bg transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
+                    className="group mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-medium text-bg transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-70"
                   >
                     {status === "loading" ? (
                       <>
@@ -290,7 +301,7 @@ export function Contact() {
                         <PaperPlaneTilt
                           size={15}
                           weight="bold"
-                          className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                          className="transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-emerald-400"
                         />
                       </>
                     )}
@@ -311,6 +322,24 @@ export function Contact() {
           </motion.div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {copied && (
+          <motion.div
+            initial={{ opacity: 0, y: 16, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.95 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed bottom-6 left-1/2 z-[70] -translate-x-1/2"
+            role="status"
+          >
+            <div className="flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2.5 text-sm font-medium text-ink shadow-lg">
+              <Check size={15} weight="bold" className="text-emerald-500" />
+              {t.contact.emailCopied}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

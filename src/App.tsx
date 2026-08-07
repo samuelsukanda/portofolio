@@ -1,4 +1,5 @@
-import { lazy, Suspense, useEffect, useState } from "react"
+import { lazy, Suspense, useEffect, useRef, useState } from "react"
+import Lenis from "lenis"
 import { Nav } from "./components/Nav"
 import { Hero } from "./components/Hero"
 import { About } from "./components/About"
@@ -24,6 +25,8 @@ function SectionFallback() {
 export default function App() {
   const { t } = useLang()
   const [path, setPath] = useState(window.location.pathname)
+  const lenisRef = useRef<Lenis | null>(null)
+  const isRoot = path === "/" || path === "/index.html"
 
   useEffect(() => {
     const onPopState = () => setPath(window.location.pathname)
@@ -31,7 +34,42 @@ export default function App() {
     return () => window.removeEventListener("popstate", onPopState)
   }, [])
 
-  const isRoot = path === "/" || path === "/index.html"
+  useEffect(() => {
+    if (!isRoot) return
+    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true })
+    lenisRef.current = lenis
+    let raf = 0
+    const loop = (time: number) => {
+      lenis.raf(time)
+      raf = requestAnimationFrame(loop)
+    }
+    raf = requestAnimationFrame(loop)
+
+    const onClick = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]')
+      if (!anchor) return
+      const href = anchor.getAttribute("href")
+      if (!href || href === "#" || anchor.classList.contains("skip-link")) return
+      e.preventDefault()
+      if (href === "#top") {
+        lenis.scrollTo(0, { duration: 1.1 })
+      } else {
+        const el = document.querySelector<HTMLElement>(href)
+        if (!el) return
+        lenis.scrollTo(el, { offset: -12, duration: 1.1 })
+      }
+      history.pushState(null, "", href)
+      window.dispatchEvent(new HashChangeEvent("hashchange"))
+    }
+    document.addEventListener("click", onClick)
+
+    return () => {
+      cancelAnimationFrame(raf)
+      document.removeEventListener("click", onClick)
+      lenis.destroy()
+      lenisRef.current = null
+    }
+  }, [isRoot])
 
   if (!isRoot) {
     return (
