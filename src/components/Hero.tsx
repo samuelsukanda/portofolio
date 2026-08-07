@@ -22,8 +22,8 @@ export function Hero() {
 
   const mx = useMotionValue(50)
   const my = useMotionValue(50)
-  const sx = useSpring(mx, { stiffness: 60, damping: 25 })
-  const sy = useSpring(my, { stiffness: 60, damping: 25 })
+  const sx = useSpring(mx, { stiffness: 350, damping: 25, mass: 0.1 })
+  const sy = useSpring(my, { stiffness: 350, damping: 25, mass: 0.1 })
   const glowBg = useMotionTemplate`radial-gradient(600px at ${sx}% ${sy}%, var(--glow), transparent 70%)`
 
   const handleMove = (e: React.MouseEvent) => {

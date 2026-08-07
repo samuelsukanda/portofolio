@@ -16,8 +16,8 @@ export function SpotlightCard({ children, spotSize = 280 }: SpotlightCardProps) 
 
   const mx = useMotionValue(50)
   const my = useMotionValue(50)
-  const sx = useSpring(mx, { stiffness: 150, damping: 28, mass: 0.4 })
-  const sy = useSpring(my, { stiffness: 150, damping: 28, mass: 0.4 })
+  const sx = useSpring(mx, { stiffness: 450, damping: 28, mass: 0.1 })
+  const sy = useSpring(my, { stiffness: 450, damping: 28, mass: 0.1 })
   const glowBg = useMotionTemplate`radial-gradient(${spotSize}px at ${sx}% ${sy}%, var(--glow), transparent 70%)`
 
   const onMove = (e: React.MouseEvent) => {
