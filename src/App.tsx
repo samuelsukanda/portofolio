@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react"
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react"
 import Lenis from "lenis"
 import { Nav } from "./components/Nav"
 import { Hero } from "./components/Hero"
@@ -9,6 +9,9 @@ import { Services } from "./components/Services"
 import { Footer } from "./components/Footer"
 import { NotFound } from "./components/NotFound"
 import { Seo } from "./components/Seo"
+import { Preloader } from "./components/Preloader"
+import { CustomCursor } from "./components/CustomCursor"
+import { TechMarquee } from "./components/TechMarquee"
 import { useLang } from "./lib/i18n"
 
 const Projects = lazy(() =>
@@ -25,8 +28,11 @@ function SectionFallback() {
 export default function App() {
   const { t } = useLang()
   const [path, setPath] = useState(window.location.pathname)
+  const [loaded, setLoaded] = useState(false)
   const lenisRef = useRef<Lenis | null>(null)
   const isRoot = path === "/" || path === "/index.html"
+
+  const handlePreloaderComplete = useCallback(() => setLoaded(true), [])
 
   useEffect(() => {
     const onPopState = () => setPath(window.location.pathname)
@@ -82,6 +88,12 @@ export default function App() {
 
   return (
     <div id="top" className="min-h-[100dvh] overflow-x-clip">
+      {/* Preloader */}
+      {!loaded && <Preloader onComplete={handlePreloaderComplete} />}
+
+      {/* Custom cursor (desktop only) */}
+      <CustomCursor />
+
       <a href="#main" className="skip-link">
         {t.nav.skipToContent}
       </a>
@@ -89,6 +101,7 @@ export default function App() {
       <Nav />
       <main id="main">
         <Hero />
+        <TechMarquee />
         <About />
         <Skills />
         <Experience />

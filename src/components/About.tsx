@@ -2,12 +2,14 @@ import { Handshake, Check } from "@phosphor-icons/react"
 import { capabilities } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { Reveal, RevealItem } from "./Reveal"
+import { useSectionReveal } from "../lib/useSectionReveal"
 
 export function About() {
   const { t, L } = useLang()
+  const sectionRef = useSectionReveal<HTMLElement>()
 
   return (
-    <section id="about" className="relative border-t border-line">
+    <section id="about" ref={sectionRef} className="section-reveal relative border-t border-line">
       <div className="container-site py-20 lg:py-28">
         <Reveal>
           <RevealItem className="max-w-3xl">

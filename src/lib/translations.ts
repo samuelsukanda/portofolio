@@ -20,6 +20,7 @@ export const ui = {
       viewWork: "Lihat portofolio",
       contact: "Hubungi saya",
       findMe: "Temukan saya",
+      available: "Tersedia untuk proyek",
     },
     about: {
       title: "Tentang saya",
@@ -149,6 +150,7 @@ export const ui = {
       viewWork: "View portfolio",
       contact: "Contact me",
       findMe: "Find me",
+      available: "Available for work",
     },
     about: {
       title: "About me",
@@ -281,6 +283,7 @@ export type UiDict = {
     viewWork: string
     contact: string
     findMe: string
+    available: string
   }
   about: {
     title: string

@@ -3,12 +3,14 @@ import { skills } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { SectionHeading } from "./SectionHeading"
 import { SpotlightCard } from "./SpotlightCard"
+import { useSectionReveal } from "../lib/useSectionReveal"
 
 export function Skills() {
   const { t, L } = useLang()
+  const sectionRef = useSectionReveal<HTMLElement>()
 
   return (
-    <section id="skills" className="border-t border-line">
+    <section id="skills" ref={sectionRef} className="section-reveal border-t border-line">
       <div className="container-site py-20 lg:py-28">
         <SectionHeading
           eyebrow={t.skills.eyebrow}

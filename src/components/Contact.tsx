@@ -288,7 +288,7 @@ export function Contact() {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="group mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-medium text-bg transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-70"
+                    className="group mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-medium text-bg transition-transform duration-200 hover:scale-[1.01] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
                   >
                     {status === "loading" ? (
                       <>

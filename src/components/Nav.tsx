@@ -67,7 +67,7 @@ export function Nav() {
 
   return (
     <header className={`fixed inset-x-0 top-0 z-40 ${scrolled ? "shadow-sm" : ""}`}>
-      <div className="border-b border-line bg-bg">
+      <div className={`border-b transition-all duration-500 ${scrolled ? "border-line bg-[color-mix(in_srgb,var(--bg)_72%,transparent)] backdrop-blur-xl backdrop-saturate-[1.4] supports-[backdrop-filter]:bg-[color-mix(in_srgb,var(--bg)_72%,transparent)]" : "border-transparent bg-bg"}`}>
         <nav className="container-site flex h-16 items-center justify-between">
           <a href="#top" className="flex items-center gap-2" aria-label={t.nav.home}>
             <span className="flex size-8 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent-2 text-sm font-bold text-accent-ink">

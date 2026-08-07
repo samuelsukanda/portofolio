@@ -20,7 +20,6 @@ import { projects } from "../lib/data"
 import type { Project } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { SectionHeading } from "./SectionHeading"
-import { Magnetic } from "./Magnetic"
 import { BlurImage } from "./BlurImage"
 
 export function Projects() {
@@ -298,26 +297,22 @@ function ProjectCarousel({
         aria-hidden
       />
 
-      <Magnetic strength={0.25} className="absolute left-4 top-1/2 z-20 -translate-y-1/2">
-        <button
-          type="button"
-          onClick={() => nudge(-1)}
-          aria-label={t.projects.prevCard}
-          className="flex size-12 items-center justify-center rounded-full border border-line bg-surface text-ink shadow-md transition-colors hover:border-accent hover:text-accent"
-        >
-          <CaretLeft size={20} weight="bold" />
-        </button>
-      </Magnetic>
-      <Magnetic strength={0.25} className="absolute right-4 top-1/2 z-20 -translate-y-1/2">
-        <button
-          type="button"
-          onClick={() => nudge(1)}
-          aria-label={t.projects.nextCard}
-          className="flex size-12 items-center justify-center rounded-full border border-line bg-surface text-ink shadow-md transition-colors hover:border-accent hover:text-accent"
-        >
-          <CaretRight size={20} weight="bold" />
-        </button>
-      </Magnetic>
+      <button
+        type="button"
+        onClick={() => nudge(-1)}
+        aria-label={t.projects.prevCard}
+        className="absolute left-4 top-1/2 z-20 flex size-12 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface text-ink shadow-md transition-colors hover:border-accent hover:text-accent"
+      >
+        <CaretLeft size={20} weight="bold" />
+      </button>
+      <button
+        type="button"
+        onClick={() => nudge(1)}
+        aria-label={t.projects.nextCard}
+        className="absolute right-4 top-1/2 z-20 flex size-12 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface text-ink shadow-md transition-colors hover:border-accent hover:text-accent"
+      >
+        <CaretRight size={20} weight="bold" />
+      </button>
 
       <div
         className="relative overflow-hidden py-2"

@@ -2,12 +2,14 @@ import { motion } from "motion/react"
 import { experience } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { SectionHeading } from "./SectionHeading"
+import { useSectionReveal } from "../lib/useSectionReveal"
 
 export function Experience() {
   const { t, L } = useLang()
+  const sectionRef = useSectionReveal<HTMLElement>()
 
   return (
-    <section id="experience" className="border-t border-line">
+    <section id="experience" ref={sectionRef} className="section-reveal border-t border-line">
       <div className="container-site py-20 lg:py-28">
         <SectionHeading
           eyebrow={t.experience.eyebrow}

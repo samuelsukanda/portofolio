@@ -1,6 +1,7 @@
 import { useRef } from "react"
 import {
   motion,
+  useReducedMotion,
   useMotionValue,
   useSpring,
   useMotionTemplate,
@@ -10,10 +11,12 @@ import { profile } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { Tooltip } from "./Tooltip"
 import { BlurImage } from "./BlurImage"
+import { ParticleGrid } from "./ParticleGrid"
 
 const ease = [0.16, 1, 0.3, 1] as const
 
 export function Hero() {
+  const reduce = useReducedMotion()
   const { t } = useLang()
   const sectionRef = useRef<HTMLElement>(null)
 
@@ -43,25 +46,32 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      onMouseMove={handleMove}
+      onMouseMove={reduce ? undefined : handleMove}
       className="relative overflow-hidden"
     >
+      {/* Particle grid background */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <ParticleGrid />
+      </div>
+
       <motion.div
         className="pointer-events-none absolute inset-0"
         style={{ background: glowBg }}
         aria-hidden
       />
 
-      <>
-        <div
-          className="pointer-events-none absolute -left-24 top-24 size-72 animate-float rounded-full bg-accent/10 blur-3xl"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute -right-32 bottom-0 size-80 animate-float-delay rounded-full bg-accent-2/10 blur-3xl"
-          aria-hidden
-        />
-      </>
+      {!reduce && (
+        <>
+          <div
+            className="pointer-events-none absolute -left-24 top-24 size-72 animate-float rounded-full bg-accent/10 blur-3xl"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -right-32 bottom-0 size-80 animate-float-delay rounded-full bg-accent-2/10 blur-3xl"
+            aria-hidden
+          />
+        </>
+      )}
 
       <div className="container-site relative grid min-h-[calc(100dvh-4rem)] items-center gap-14 pt-24 pb-16 lg:grid-cols-12 lg:gap-10 lg:pt-24 lg:pb-10">
         <motion.div className="lg:col-span-7" variants={container} initial="hidden" animate="show">
@@ -124,7 +134,7 @@ export function Hero() {
 
         <motion.div
           className="lg:col-span-5"
-          initial={{ opacity: 0, y: 32 }}
+          initial={reduce ? false : { opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease }}
         >
