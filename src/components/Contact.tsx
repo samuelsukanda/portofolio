@@ -11,6 +11,7 @@ import {
   WarningCircle,
 } from "@phosphor-icons/react"
 import { profile } from "../lib/data"
+import { contactForm } from "../lib/config"
 import { useLang } from "../lib/i18n"
 import { SectionHeading } from "./SectionHeading"
 
@@ -82,6 +83,7 @@ export function Contact() {
   const [message, setMessage] = useState("")
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [status, setStatus] = useState<Status>("idle")
+  const [submitError, setSubmitError] = useState("")
 
   const validate = () => {
     const next: Record<string, string> = {}
@@ -92,11 +94,28 @@ export function Contact() {
     return Object.keys(next).length === 0
   }
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!validate()) return
+    setSubmitError("")
     setStatus("loading")
-    setTimeout(() => setStatus("success"), 1400)
+    if (!contactForm.endpoint) {
+      setStatus("error")
+      setSubmitError(t.contact.notConfigured + profile.email)
+      return
+    }
+    try {
+      const res = await fetch(contactForm.endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      })
+      if (!res.ok) throw new Error(`Request failed: ${res.status}`)
+      setStatus("success")
+    } catch {
+      setStatus("error")
+      setSubmitError(t.contact.sendError)
+    }
   }
 
   const channels = [
@@ -235,6 +254,16 @@ export function Contact() {
                       </>
                     )}
                   </button>
+
+                  {status === "error" && (
+                    <p
+                      role="alert"
+                      className="mt-3 flex items-start gap-2 text-xs leading-relaxed text-red-400"
+                    >
+                      <WarningCircle size={14} weight="bold" className="mt-0.5 shrink-0" />
+                      <span className="break-words">{submitError}</span>
+                    </p>
+                  )}
                 </motion.form>
               )}
             </AnimatePresence>

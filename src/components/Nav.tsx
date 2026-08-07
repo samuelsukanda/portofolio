@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { motion, AnimatePresence, useReducedMotion, useScroll, useSpring } from "motion/react"
+import { motion, AnimatePresence, useReducedMotion, useMotionValue } from "motion/react"
 import { List, X, ArrowUpRight } from "@phosphor-icons/react"
 import { navLinks, profile } from "../lib/data"
 import { useLang } from "../lib/i18n"
@@ -12,8 +12,22 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const reduce = useReducedMotion()
   const { t } = useLang()
-  const { scrollYProgress } = useScroll()
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 })
+  const progress = useMotionValue(0)
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const el = document.documentElement
+      const max = el.scrollHeight - el.clientHeight
+      progress.set(max > 0 ? Math.min(window.scrollY / max, 1) : 0)
+    }
+    updateProgress()
+    window.addEventListener("scroll", updateProgress, { passive: true })
+    window.addEventListener("resize", updateProgress)
+    return () => {
+      window.removeEventListener("scroll", updateProgress)
+      window.removeEventListener("resize", updateProgress)
+    }
+  }, [progress])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -138,7 +152,7 @@ export function Nav() {
       </div>
 
       <motion.div
-        className="h-px origin-left bg-gradient-to-r from-accent via-accent-2 to-transparent"
+        className="h-0.5 origin-left bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400"
         style={{ scaleX: progress }}
         aria-hidden
       />

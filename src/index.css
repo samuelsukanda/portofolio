@@ -105,7 +105,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 0.75rem;
   }
 
   body {
@@ -129,7 +129,31 @@
   }
 
   section[id] {
-    scroll-margin-top: 4.5rem;
+    scroll-margin-top: 0;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--line-strong);
+    border-radius: 9999px;
+    border: 2px solid var(--bg);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
   }
 }
 
@@ -222,6 +246,26 @@
   .dark .tone-rose {
     --sec: #fb7185;
     --sec-2: #fda4af;
+  }
+
+  .skip-link {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 100;
+    transform: translateY(-300%);
+    border-radius: 9999px;
+    background-color: var(--accent);
+    color: var(--accent-ink);
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+    outline-offset: 3px;
   }
 
   .card-hover {

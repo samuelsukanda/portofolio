@@ -11,6 +11,7 @@ export const ui = {
       openMenu: "Buka menu",
       closeMenu: "Tutup menu",
       contactCta: "Hubungi saya",
+      skipToContent: "Langsung ke konten",
     },
     hero: {
       headlineStart: "Membangun website dan aplikasi web yang",
@@ -101,6 +102,10 @@ export const ui = {
       sentNote: "Terima kasih, {name}. Saya akan segera membalas lewat email.",
       sendAnother: "Kirim pesan lain",
       clickToChat: "Klik untuk chat",
+      sendError:
+        "Pesan gagal terkirim. Coba lagi dalam beberapa saat, atau hubungi saya langsung lewat email.",
+      notConfigured:
+        "Form belum dikonfigurasi. Isi `formEndpoint` di `src/lib/config.ts` dengan endpoint Formspree, atau kirim email langsung ke ",
     },
     footer: {
       tagline: "{role} yang membangun website dan aplikasi web modern, cepat, dan andal.",
@@ -133,6 +138,7 @@ export const ui = {
       openMenu: "Open menu",
       closeMenu: "Close menu",
       contactCta: "Contact me",
+      skipToContent: "Skip to content",
     },
     hero: {
       headlineStart: "Building websites and web apps that are",
@@ -224,6 +230,10 @@ export const ui = {
       sentNote: "Thank you, {name}. I'll get back to you via email shortly.",
       sendAnother: "Send another message",
       clickToChat: "Click to chat",
+      sendError:
+        "The message could not be sent. Please try again in a moment, or contact me directly via email.",
+      notConfigured:
+        "The form is not configured yet. Set `formEndpoint` in `src/lib/config.ts` with your Formspree endpoint, or email me directly at ",
     },
     footer: {
       tagline: "{role} who builds modern, fast, and reliable websites and web apps.",
@@ -258,6 +268,7 @@ export type UiDict = {
     openMenu: string
     closeMenu: string
     contactCta: string
+    skipToContent: string
   }
   hero: {
     headlineStart: string
@@ -324,6 +335,8 @@ export type UiDict = {
     sentNote: string
     sendAnother: string
     clickToChat: string
+    sendError: string
+    notConfigured: string
   }
   footer: { tagline: string; backToTop: string }
   theme: { toDark: string; toLight: string }

@@ -15,6 +15,9 @@ export function ThemeToggle() {
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark)
     localStorage.setItem("theme", dark ? "dark" : "light")
+    document
+      .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+      ?.setAttribute("content", dark ? "#0c0c10" : "#f7f7f4")
   }, [dark])
 
   return (

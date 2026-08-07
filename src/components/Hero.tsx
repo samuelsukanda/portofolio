@@ -10,6 +10,7 @@ import { ArrowDownRight, ArrowUpRight, ArrowRight } from "@phosphor-icons/react"
 import { profile } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { Tooltip } from "./Tooltip"
+import { BlurImage } from "./BlurImage"
 
 const ease = [0.16, 1, 0.3, 1] as const
 
@@ -149,10 +150,9 @@ function ProfileCard() {
       />
       <div className="relative overflow-hidden rounded-card border border-line bg-surface shadow-md">
         <div className="relative aspect-[9/10]">
-          <img
-            src="https://picsum.photos/seed/raka-dev/900/675"
+          <BlurImage
+            src="/images/hero.svg"
             alt="Foto Samuel Sukanda"
-            className="size-full object-cover"
             loading="eager"
             fetchPriority="high"
           />

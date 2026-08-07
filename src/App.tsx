@@ -8,6 +8,7 @@ import { Services } from "./components/Services"
 import { Footer } from "./components/Footer"
 import { NotFound } from "./components/NotFound"
 import { Seo } from "./components/Seo"
+import { useLang } from "./lib/i18n"
 
 const Projects = lazy(() =>
   import("./components/Projects").then((m) => ({ default: m.Projects })),
@@ -21,6 +22,7 @@ function SectionFallback() {
 }
 
 export default function App() {
+  const { t } = useLang()
   const [path, setPath] = useState(window.location.pathname)
 
   useEffect(() => {
@@ -42,9 +44,12 @@ export default function App() {
 
   return (
     <div id="top" className="min-h-[100dvh] overflow-x-clip">
+      <a href="#main" className="skip-link">
+        {t.nav.skipToContent}
+      </a>
       <Seo />
       <Nav />
-      <main>
+      <main id="main">
         <Hero />
         <About />
         <Skills />

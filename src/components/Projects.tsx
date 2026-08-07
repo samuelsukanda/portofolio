@@ -22,6 +22,7 @@ import type { Project } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { SectionHeading } from "./SectionHeading"
 import { Magnetic } from "./Magnetic"
+import { BlurImage } from "./BlurImage"
 
 export function Projects() {
   const { t } = useLang()
@@ -98,12 +99,11 @@ function ProjectCard({
           className="relative aspect-[16/10] overflow-hidden"
           style={{ "--px": "0px", "--py": "0px" } as React.CSSProperties}
         >
-          <img
+          <BlurImage
             src={project.image}
             alt={project.title}
-            loading="lazy"
-            className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-            style={{
+            imgClassName="transition-transform duration-500 group-hover:scale-105"
+            imgStyle={{
               transform: "translate(var(--px, 0px), var(--py, 0px)) scale(1.12)",
               transitionProperty: "transform",
             }}
@@ -334,6 +334,24 @@ function ProjectCarousel({
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
         onWheel={onWheel}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowLeft") {
+            e.preventDefault()
+            nudge(-1)
+          }
+          if (e.key === "ArrowRight") {
+            e.preventDefault()
+            nudge(1)
+          }
+        }}
+        onFocus={() => {
+          paused.current = true
+        }}
+        onBlur={() => {
+          paused.current = false
+        }}
+        tabIndex={0}
+        aria-label={t.projects.title}
         style={{ touchAction: "pan-y" }}
       >
         <motion.div
@@ -352,11 +370,51 @@ function ProjectCarousel({
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   const { t, L } = useLang()
   const reduce = useReducedMotion()
+  const dialogRef = useRef<HTMLDivElement>(null)
   const [slide, setSlide] = useState(0)
   const [zoomed, setZoomed] = useState(false)
 
   useEffect(() => {
     document.body.style.overflow = "hidden"
+    const prev = document.activeElement as HTMLElement | null
+    const selector =
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    const focusables = () =>
+      dialogRef.current
+        ? Array.from(
+            dialogRef.current.querySelectorAll<HTMLElement>(selector),
+          ).filter((el) => !el.hasAttribute("disabled") && el.offsetParent !== null)
+        : []
+    focusables()[0]?.focus()
+
+    const trapTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return
+      const els = focusables()
+      if (els.length === 0) return
+      const first = els[0]
+      const last = els[els.length - 1]
+      const contained = dialogRef.current?.contains(document.activeElement)
+      if (e.shiftKey) {
+        if (document.activeElement === first || !contained) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else {
+        if (document.activeElement === last || !contained) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+    document.addEventListener("keydown", trapTab)
+    return () => {
+      document.removeEventListener("keydown", trapTab)
+      document.body.style.overflow = ""
+      prev?.focus()
+    }
+  }, [])
+
+  useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         if (zoomed) setZoomed(false)
@@ -391,6 +449,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
       />
 
       <motion.div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-label={`${t.projects.openDetail} ${project.title}`}
@@ -409,12 +468,13 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
           >
             <MagnifyingGlassPlus size={16} weight="bold" />
           </button>
-          <img
-            src={project.screenshots[slide]}
-            alt={`${project.title} ${slide + 1}`}
-            className="size-full cursor-zoom-in object-cover transition-transform duration-300"
-            onClick={() => setZoomed(true)}
-          />
+          <div className="relative size-full cursor-zoom-in" onClick={() => setZoomed(true)}>
+            <BlurImage
+              src={project.screenshots[slide]}
+              alt={`${project.title} ${slide + 1}`}
+              imgClassName="transition-transform duration-300"
+            />
+          </div>
           <button
             type="button"
             onClick={onClose}

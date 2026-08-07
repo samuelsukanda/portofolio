@@ -163,11 +163,11 @@ export const projects: Project[] = [
     github: "#",
     live: "#",
     accent: "#0ea5e9",
-    image: "https://picsum.photos/seed/sigercep-app/1200/900",
+    image: "/images/sigercep.svg",
     screenshots: [
-      "https://picsum.photos/seed/sigercep-1/1200/800",
-      "https://picsum.photos/seed/sigercep-2/1200/800",
-      "https://picsum.photos/seed/sigercep-3/1200/800",
+      "/images/sigercep-1.svg",
+      "/images/sigercep-2.svg",
+      "/images/sigercep-3.svg",
     ],
   },
   {
@@ -210,11 +210,11 @@ export const projects: Project[] = [
     github: "#",
     live: "#",
     accent: "#f97316",
-    image: "https://picsum.photos/seed/helpdesk-app/1200/900",
+    image: "/images/helpdesk.svg",
     screenshots: [
-      "https://picsum.photos/seed/helpdesk-1/1200/800",
-      "https://picsum.photos/seed/helpdesk-2/1200/800",
-      "https://picsum.photos/seed/helpdesk-3/1200/800",
+      "/images/helpdesk-1.svg",
+      "/images/helpdesk-2.svg",
+      "/images/helpdesk-3.svg",
     ],
   },
   {
@@ -257,11 +257,11 @@ export const projects: Project[] = [
     github: "#",
     live: "#",
     accent: "#f43f5e",
-    image: "https://picsum.photos/seed/wedding-app/1200/900",
+    image: "/images/wedding-planner.svg",
     screenshots: [
-      "https://picsum.photos/seed/wedding-1/1200/800",
-      "https://picsum.photos/seed/wedding-2/1200/800",
-      "https://picsum.photos/seed/wedding-3/1200/800",
+      "/images/wedding-planner-1.svg",
+      "/images/wedding-planner-2.svg",
+      "/images/wedding-planner-3.svg",
     ],
   },
   {
@@ -304,11 +304,11 @@ export const projects: Project[] = [
     github: "#",
     live: "#",
     accent: "#8b5cf6",
-    image: "https://picsum.photos/seed/photobooth-app/1200/900",
+    image: "/images/photobooth.svg",
     screenshots: [
-      "https://picsum.photos/seed/photobooth-1/1200/800",
-      "https://picsum.photos/seed/photobooth-2/1200/800",
-      "https://picsum.photos/seed/photobooth-3/1200/800",
+      "/images/photobooth-1.svg",
+      "/images/photobooth-2.svg",
+      "/images/photobooth-3.svg",
     ],
   },
 ]
