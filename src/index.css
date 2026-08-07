@@ -1,0 +1,249 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #f7f7f4;
+  --bg-2: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #efefe9;
+  --ink: #14141a;
+  --ink-2: #5b5b66;
+  --ink-3: #9b9ba6;
+  --line: #e4e4dc;
+  --line-strong: #d5d5cc;
+  --accent: #0e9f6e;
+  --accent-2: #14b8a6;
+  --accent-ink: #ffffff;
+  --glow: rgba(14, 159, 110, 0.18);
+  --shadow-1: 0 1px 2px rgba(20, 20, 26, 0.06), 0 4px 12px rgba(20, 20, 26, 0.04);
+  --shadow-2: 0 4px 16px rgba(20, 20, 26, 0.08), 0 12px 40px rgba(20, 20, 26, 0.06);
+  --shadow-3: 0 12px 32px rgba(20, 20, 26, 0.1), 0 32px 80px rgba(20, 20, 26, 0.08);
+}
+
+.dark {
+  --bg: #0c0c10;
+  --bg-2: #101016;
+  --surface: #15151c;
+  --surface-2: #1b1b24;
+  --ink: #f2f2f5;
+  --ink-2: #a1a1ad;
+  --ink-3: #6b6b78;
+  --line: #24242d;
+  --line-strong: #32323e;
+  --accent: #34d399;
+  --accent-2: #2dd4bf;
+  --accent-ink: #0c0c10;
+  --glow: rgba(52, 211, 153, 0.16);
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-2: 0 4px 16px rgba(0, 0, 0, 0.45), 0 12px 40px rgba(0, 0, 0, 0.35);
+  --shadow-3: 0 12px 32px rgba(0, 0, 0, 0.5), 0 32px 80px rgba(0, 0, 0, 0.45);
+}
+
+@theme inline {
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-ink: var(--accent-ink);
+
+  --radius-card: 1.25rem;
+  --radius-modal: 1.5rem;
+
+  --shadow-sm: var(--shadow-1);
+  --shadow-md: var(--shadow-2);
+  --shadow-lg: var(--shadow-3);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-delay: float 9s ease-in-out 1.5s infinite;
+  --animate-gradient: gradient-shift 12s ease-in-out infinite;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-spin-slow: spin 12s linear infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+}
+
+@layer utilities {
+  .container-site {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 1280px;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-site {
+      padding-inline: 2rem;
+    }
+  }
+
+  .text-gradient {
+    background: linear-gradient(100deg, var(--ink), var(--ink-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-accent {
+    background: linear-gradient(110deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-mesh {
+    background:
+      radial-gradient(at 20% 20%, var(--glow) 0, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(124, 156, 255, 0.08) 0, transparent 45%),
+      radial-gradient(at 60% 100%, var(--glow) 0, transparent 40%);
+  }
+
+  .glass {
+    background: color-mix(in srgb, var(--bg) 72%, transparent);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+
+  .tone-blue {
+    --sec: var(--accent);
+    --sec-2: var(--accent-2);
+  }
+
+  .tone-emerald {
+    --sec: #10b981;
+    --sec-2: #14b8a6;
+  }
+
+  .tone-violet {
+    --sec: #8b5cf6;
+    --sec-2: #d946ef;
+  }
+
+  .tone-amber {
+    --sec: #f59e0b;
+    --sec-2: #f97316;
+  }
+
+  .tone-rose {
+    --sec: #f43f5e;
+    --sec-2: #fb7185;
+  }
+
+  .dark .tone-blue {
+    --sec: var(--accent);
+    --sec-2: var(--accent-2);
+  }
+
+  .dark .tone-emerald {
+    --sec: #34d399;
+    --sec-2: #2dd4bf;
+  }
+
+  .dark .tone-violet {
+    --sec: #a78bfa;
+    --sec-2: #e879f9;
+  }
+
+  .dark .tone-amber {
+    --sec: #fbbf24;
+    --sec-2: #fb923c;
+  }
+
+  .dark .tone-rose {
+    --sec: #fb7185;
+    --sec-2: #fda4af;
+  }
+
+  .card-hover {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.4s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

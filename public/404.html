@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Halaman tidak ditemukan</title>
+    <meta name="robots" content="noindex" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #0c0c10;
+        color: #f2f2f5;
+        font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+        display: grid;
+        place-items: center;
+        min-height: 100dvh;
+        text-align: center;
+        padding: 2rem;
+      }
+      .grad {
+        background: linear-gradient(110deg, #34d399, #2dd4bf);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .code {
+        font-size: clamp(6rem, 20vw, 11rem);
+        font-weight: 700;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+      h1 {
+        margin-top: 1.25rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+      p {
+        margin-top: 0.75rem;
+        color: #a1a1ad;
+        max-width: 32ch;
+        line-height: 1.6;
+      }
+      a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        padding: 0.8rem 1.6rem;
+        border-radius: 999px;
+        background: #f2f2f5;
+        color: #0c0c10;
+        font-weight: 500;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: opacity 0.2s;
+      }
+      a:hover {
+        opacity: 0.85;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p class="code grad">404</p>
+      <h1>Halaman tidak ditemukan</h1>
+      <p>Halaman yang kamu cari tidak ada atau sudah dipindahkan.</p>
+      <a href="/">Kembali ke beranda &rarr;</a>
+    </div>
+  </body>
+</html>
