@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { motion, AnimatePresence, useReducedMotion, useMotionValue } from "motion/react"
+import { motion, AnimatePresence, useMotionValue } from "motion/react"
 import { List, X, ArrowUpRight } from "@phosphor-icons/react"
 import { navLinks, profile } from "../lib/data"
 import { useLang } from "../lib/i18n"
@@ -10,7 +10,6 @@ export function Nav() {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState("")
   const [scrolled, setScrolled] = useState(false)
-  const reduce = useReducedMotion()
   const { t } = useLang()
   const progress = useMotionValue(0)
 
@@ -117,9 +116,9 @@ export function Nav() {
         <AnimatePresence>
           {open && (
             <motion.div
-              initial={reduce ? false : { opacity: 0, height: 0 }}
+              initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
-              exit={reduce ? undefined : { opacity: 0, height: 0 }}
+              exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="overflow-hidden border-t border-line lg:hidden"
             >
@@ -129,7 +128,7 @@ export function Nav() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    initial={reduce ? false : { opacity: 0, x: -12 }}
+                    initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05, duration: 0.3 }}
                     className="flex items-center justify-between rounded-xl px-3 py-3 text-base text-ink-2 transition-colors hover:bg-surface-2 hover:text-ink"

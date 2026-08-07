@@ -1,7 +1,6 @@
 import { useRef, type ReactNode } from "react"
 import {
   motion,
-  useReducedMotion,
   useSpring,
   useMotionValue,
   useMotionTemplate,
@@ -13,7 +12,6 @@ type SpotlightCardProps = {
 }
 
 export function SpotlightCard({ children, spotSize = 280 }: SpotlightCardProps) {
-  const reduce = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
 
   const mx = useMotionValue(50)
@@ -23,7 +21,7 @@ export function SpotlightCard({ children, spotSize = 280 }: SpotlightCardProps) 
   const glowBg = useMotionTemplate`radial-gradient(${spotSize}px at ${sx}% ${sy}%, var(--glow), transparent 70%)`
 
   const onMove = (e: React.MouseEvent) => {
-    if (reduce || !ref.current) return
+    if (!ref.current) return
     const rect = ref.current.getBoundingClientRect()
     mx.set(((e.clientX - rect.left) / rect.width) * 100)
     my.set(((e.clientY - rect.top) / rect.height) * 100)

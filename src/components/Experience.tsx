@@ -1,10 +1,9 @@
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
 import { experience } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { SectionHeading } from "./SectionHeading"
 
 export function Experience() {
-  const reduce = useReducedMotion()
   const { t, L } = useLang()
 
   return (
@@ -27,8 +26,8 @@ export function Experience() {
               <motion.li
                 key={exp.period}
                 className="relative pl-10"
-                initial={reduce ? false : { opacity: 0, x: -24 }}
-                whileInView={reduce ? undefined : { opacity: 1, x: 0 }}
+                initial={{ opacity: 0, x: -24 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
               >

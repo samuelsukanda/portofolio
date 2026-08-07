@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
 import type { ReactNode } from "react"
 import { fadeUp, stagger } from "../lib/motion"
 
@@ -9,12 +9,6 @@ type RevealProps = {
 }
 
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
-  const reduce = useReducedMotion()
-
-  if (reduce) {
-    return <div className={className}>{children}</div>
-  }
-
   return (
     <motion.div
       className={className}
@@ -34,12 +28,6 @@ type RevealItemProps = {
 }
 
 export function RevealItem({ children, className }: RevealItemProps) {
-  const reduce = useReducedMotion()
-
-  if (reduce) {
-    return <div className={className}>{children}</div>
-  }
-
   return (
     <motion.div className={className} variants={fadeUp}>
       {children}

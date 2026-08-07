@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Moon, Sun } from "@phosphor-icons/react"
-import { motion, AnimatePresence, useReducedMotion } from "motion/react"
+import { motion, AnimatePresence } from "motion/react"
 import { useLang } from "../lib/i18n"
 
 export function ThemeToggle() {
@@ -10,7 +10,6 @@ export function ThemeToggle() {
       ? document.documentElement.classList.contains("dark")
       : false,
   )
-  const reduce = useReducedMotion()
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark)
@@ -30,9 +29,9 @@ export function ThemeToggle() {
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={dark ? "sun" : "moon"}
-          initial={reduce ? false : { opacity: 0, rotate: -90, scale: 0.6 }}
+          initial={{ opacity: 0, rotate: -90, scale: 0.6 }}
           animate={{ opacity: 1, rotate: 0, scale: 1 }}
-          exit={reduce ? undefined : { opacity: 0, rotate: 90, scale: 0.6 }}
+          exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           className="inline-flex"
         >

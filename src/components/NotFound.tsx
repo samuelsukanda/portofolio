@@ -1,15 +1,14 @@
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
 import { ArrowLeft } from "@phosphor-icons/react"
 import { useLang } from "../lib/i18n"
 
 export function NotFound() {
-  const reduce = useReducedMotion()
   const { t } = useLang()
 
   return (
     <main className="container-site grid min-h-[100dvh] place-items-center py-24">
       <motion.div
-        initial={reduce ? false : { opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="text-center"

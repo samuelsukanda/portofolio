@@ -5,7 +5,6 @@ import {
   animate,
   useAnimationFrame,
   useMotionValue,
-  useReducedMotion,
 } from "motion/react"
 import {
   ArrowUpRight,
@@ -66,12 +65,11 @@ function ProjectCard({
   onCardClick: (p: Project) => void
 }) {
   const { L } = useLang()
-  const reduce = useReducedMotion()
   const imgRef = useRef<HTMLDivElement>(null)
 
   const onMove = (e: React.MouseEvent) => {
     const el = imgRef.current
-    if (!el || reduce) return
+    if (!el) return
     const rect = el.getBoundingClientRect()
     const px = (e.clientX - rect.left) / rect.width - 0.5
     const py = (e.clientY - rect.top) / rect.height - 0.5
@@ -176,7 +174,6 @@ function ProjectCarousel({
   onOpen: (p: Project) => void
 }) {
   const { t } = useLang()
-  const reduce = useReducedMotion()
   const trackRef = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
   const halfWidth = useRef(0)
@@ -219,7 +216,7 @@ function ProjectCarousel({
   }
 
   useAnimationFrame((_, delta) => {
-    if (reduce || paused.current || dragging.current) return
+    if (paused.current || dragging.current) return
     let v = x.get()
     v -= (speed * delta) / 1000
     if (halfWidth.current && v <= -halfWidth.current) v += halfWidth.current
@@ -248,18 +245,13 @@ function ProjectCarousel({
   }
 
   const onWheel = (e: React.WheelEvent) => {
-    if (reduce) return
     x.set(wrap(x.get() - (e.deltaY + e.deltaX) * 0.4))
   }
 
   const nudge = (dir: 1 | -1) => {
-    if (reduce || !stepPx.current) return
+    if (!stepPx.current) return
     const from = wrap(x.get())
     const to = from - dir * stepPx.current
-    if (reduce) {
-      x.set(wrap(to))
-      return
-    }
     const controls = animate(x, [from, to], {
       duration: 0.45,
       ease: [0.16, 1, 0.3, 1],
@@ -369,7 +361,6 @@ function ProjectCarousel({
 
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   const { t, L } = useLang()
-  const reduce = useReducedMotion()
   const dialogRef = useRef<HTMLDivElement>(null)
   const [slide, setSlide] = useState(0)
   const [zoomed, setZoomed] = useState(false)
@@ -443,9 +434,9 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
       <motion.div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
-        initial={reduce ? false : { opacity: 0 }}
+        initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={reduce ? undefined : { opacity: 0 }}
+        exit={{ opacity: 0 }}
       />
 
       <motion.div
@@ -454,9 +445,9 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         aria-modal="true"
         aria-label={`${t.projects.openDetail} ${project.title}`}
         className="relative flex max-h-[90dvh] w-full max-w-3xl flex-col overflow-hidden rounded-modal border border-line bg-surface shadow-lg"
-        initial={reduce ? false : { opacity: 0, y: 32, scale: 0.97 }}
+        initial={{ opacity: 0, y: 32, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={reduce ? undefined : { opacity: 0, y: 24, scale: 0.97 }}
+        exit={{ opacity: 0, y: 24, scale: 0.97 }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="relative aspect-video shrink-0 overflow-hidden">
@@ -644,9 +635,9 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         {zoomed && (
           <motion.div
             className="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 p-4"
-            initial={reduce ? false : { opacity: 0 }}
+            initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={reduce ? undefined : { opacity: 0 }}
+            exit={{ opacity: 0 }}
             onClick={() => setZoomed(false)}
             role="dialog"
             aria-modal="true"
@@ -657,9 +648,9 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
               src={project.screenshots[slide]}
               alt={`${project.title} ${slide + 1}`}
               className="max-h-full max-w-full cursor-zoom-out rounded-lg object-contain shadow-2xl"
-              initial={reduce ? false : { opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={reduce ? undefined : { opacity: 0, scale: 0.95 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
             />

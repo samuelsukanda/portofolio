@@ -1,26 +1,25 @@
 import { useEffect, useRef, useState } from "react"
-import { motion, AnimatePresence, useReducedMotion } from "motion/react"
+import { motion, AnimatePresence } from "motion/react"
 import { Star, Quotes, CaretLeft, CaretRight } from "@phosphor-icons/react"
 import { testimonials } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { SectionHeading } from "./SectionHeading"
 
 export function Testimonials() {
-  const reduce = useReducedMotion()
   const { t, L } = useLang()
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
   const timer = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
-    if (reduce || paused) return
+    if (paused) return
     timer.current = setInterval(() => {
       setIndex((i) => (i + 1) % testimonials.length)
     }, 5000)
     return () => {
       if (timer.current) clearInterval(timer.current)
     }
-  }, [reduce, paused])
+  }, [paused])
 
   const go = (dir: number) => {
     setIndex((i) => (i + dir + testimonials.length) % testimonials.length)
@@ -47,9 +46,9 @@ export function Testimonials() {
             <AnimatePresence mode="wait">
               <motion.blockquote
                 key={index}
-                initial={reduce ? false : { opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={reduce ? undefined : { opacity: 0, y: -24 }}
+                exit={{ opacity: 0, y: -24 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className="rounded-card border border-line bg-surface p-8 shadow-sm md:p-10"
               >

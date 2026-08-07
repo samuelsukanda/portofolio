@@ -102,6 +102,8 @@ export const ui = {
       sentNote: "Terima kasih, {name}. Saya akan segera membalas lewat email.",
       sendAnother: "Kirim pesan lain",
       clickToChat: "Klik untuk chat",
+      copyEmail: "Salin email",
+      emailCopied: "Email disalin",
       sendError:
         "Pesan gagal terkirim. Coba lagi dalam beberapa saat, atau hubungi saya langsung lewat email.",
       notConfigured:
@@ -230,6 +232,8 @@ export const ui = {
       sentNote: "Thank you, {name}. I'll get back to you via email shortly.",
       sendAnother: "Send another message",
       clickToChat: "Click to chat",
+      copyEmail: "Copy email",
+      emailCopied: "Email copied",
       sendError:
         "The message could not be sent. Please try again in a moment, or contact me directly via email.",
       notConfigured:
@@ -335,6 +339,8 @@ export type UiDict = {
     sentNote: string
     sendAnother: string
     clickToChat: string
+    copyEmail: string
+    emailCopied: string
     sendError: string
     notConfigured: string
   }

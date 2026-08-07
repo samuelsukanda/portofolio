@@ -1,11 +1,12 @@
-import { useState } from "react"
-import { motion, AnimatePresence, useReducedMotion } from "motion/react"
+import { useEffect, useState } from "react"
+import { motion, AnimatePresence } from "motion/react"
 import {
   EnvelopeSimple,
   WhatsappLogo,
   GithubLogo,
   LinkedinLogo,
   Check,
+  Copy,
   PaperPlaneTilt,
   SpinnerGap,
   WarningCircle,
@@ -76,7 +77,6 @@ function Field({ id, label, value, onChange, type = "text", error, textarea }: F
 }
 
 export function Contact() {
-  const reduce = useReducedMotion()
   const { t } = useLang()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -84,6 +84,28 @@ export function Contact() {
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [status, setStatus] = useState<Status>("idle")
   const [submitError, setSubmitError] = useState("")
+  const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    const focusName = () => {
+      if (window.location.hash === "#contact") {
+        window.setTimeout(() => document.getElementById("name")?.focus(), 500)
+      }
+    }
+    focusName()
+    window.addEventListener("hashchange", focusName)
+    return () => window.removeEventListener("hashchange", focusName)
+  }, [])
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 2000)
+    } catch {
+      /* clipboard unavailable */
+    }
+  }
 
   const validate = () => {
     const next: Record<string, string> = {}
@@ -140,32 +162,51 @@ export function Contact() {
             <div className="grid gap-3 sm:grid-cols-2">
               {channels.map((c) => {
                 const Icon = c.icon
+                const isEmail = c.url.startsWith("mailto:")
                 return (
-                  <a
-                    key={c.label}
-                    href={c.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group flex items-center gap-3 rounded-card border border-line bg-surface p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-md"
-                  >
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-surface-2 text-ink transition-colors group-hover:text-accent">
-                      <Icon size={20} weight="bold" />
-                    </span>
-                    <span>
-                      <span className="block font-mono text-[11px] uppercase tracking-wider text-ink-3">
-                        {c.label}
+                  <div key={c.label} className="relative">
+                    <a
+                      href={c.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group flex items-center gap-3 rounded-card border border-line bg-surface p-4 pr-12 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-md"
+                    >
+                      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-surface-2 text-ink transition-colors group-hover:text-accent">
+                        <Icon size={20} weight="bold" />
                       </span>
-                      <span className="block truncate text-sm font-medium text-ink">{c.value}</span>
-                    </span>
-                  </a>
+                      <span>
+                        <span className="block font-mono text-[11px] uppercase tracking-wider text-ink-3">
+                          {c.label}
+                        </span>
+                        <span className="block truncate text-sm font-medium text-ink">
+                          {c.value}
+                        </span>
+                      </span>
+                    </a>
+                    {isEmail && (
+                      <button
+                        type="button"
+                        onClick={handleCopy}
+                        aria-label={copied ? t.contact.emailCopied : t.contact.copyEmail}
+                        title={t.contact.copyEmail}
+                        className="absolute right-3 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-line text-ink-2 transition-colors hover:border-accent hover:text-accent"
+                      >
+                        {copied ? (
+                          <Check size={14} weight="bold" className="text-emerald-500" />
+                        ) : (
+                          <Copy size={14} weight="bold" />
+                        )}
+                      </button>
+                    )}
+                  </div>
                 )
               })}
             </div>
           </div>
 
           <motion.div
-            initial={reduce ? false : { opacity: 0, x: 24 }}
-            whileInView={reduce ? undefined : { opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="rounded-card border border-line bg-surface p-6 shadow-sm md:p-8"
@@ -174,15 +215,15 @@ export function Contact() {
               {status === "success" ? (
                 <motion.div
                   key="success"
-                  initial={reduce ? false : { opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={reduce ? undefined : { opacity: 0 }}
+                  exit={{ opacity: 0 }}
                   className="flex flex-col items-center justify-center py-16 text-center"
                   role="status"
                 >
                   <motion.span
                     className="flex size-16 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-500"
-                    initial={reduce ? false : { scale: 0 }}
+                    initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 15 }}
                   >
@@ -210,9 +251,9 @@ export function Contact() {
                   key="form"
                   onSubmit={onSubmit}
                   noValidate
-                  initial={reduce ? false : { opacity: 0 }}
+                  initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={reduce ? undefined : { opacity: 0, scale: 0.98 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
                   className="space-y-4"
                 >
                   <Field id="name" label={t.contact.name} value={name} onChange={setName} error={errors.name} />

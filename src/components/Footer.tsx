@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
 import {
   ArrowUp,
   GithubLogo,
@@ -11,7 +11,6 @@ import { useLang } from "../lib/i18n"
 import { Tooltip } from "./Tooltip"
 
 export function Footer() {
-  const reduce = useReducedMotion()
   const { t, L } = useLang()
   const year = new Date().getFullYear()
 
@@ -78,8 +77,8 @@ export function Footer() {
           <motion.a
             href="#top"
             aria-label={t.footer.backToTop}
-            whileHover={reduce ? undefined : { y: -2 }}
-            whileTap={reduce ? undefined : { y: 0 }}
+            whileHover={{ y: -2 }}
+            whileTap={{ y: 0 }}
             className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm text-ink-2 transition-colors hover:border-accent hover:text-accent"
           >
             {t.footer.backToTop}

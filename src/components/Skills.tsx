@@ -1,11 +1,10 @@
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
 import { skills } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { SectionHeading } from "./SectionHeading"
 import { SpotlightCard } from "./SpotlightCard"
 
 export function Skills() {
-  const reduce = useReducedMotion()
   const { t, L } = useLang()
 
   return (
@@ -24,8 +23,8 @@ export function Skills() {
             return (
               <motion.div
                 key={skill.name}
-                initial={reduce ? false : { opacity: 0, y: 24 }}
-                whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: (i % 4) * 0.06, ease: [0.16, 1, 0.3, 1] }}
                 className="group relative overflow-hidden rounded-card border border-line bg-surface p-5 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-md"

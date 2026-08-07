@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "motion/react"
+import { motion } from "motion/react"
 
 type Tone = "blue" | "emerald" | "violet" | "amber" | "rose"
 
@@ -17,14 +17,13 @@ export function SectionHeading({
   align = "left",
   tone = "blue",
 }: SectionHeadingProps) {
-  const reduce = useReducedMotion()
   const alignCls = align === "center" ? "mx-auto text-center" : ""
 
   return (
     <motion.div
       className={`tone-${tone} max-w-2xl ${alignCls}`}
-      initial={reduce ? false : { opacity: 0, y: 24 }}
-      whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
