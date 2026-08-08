@@ -18,6 +18,12 @@ import {
   MagnifyingGlassPlus,
   MagnifyingGlassMinus,
 } from "@phosphor-icons/react"
+import { useDrag } from "@use-gesture/react"
+import {
+  TransformWrapper,
+  TransformComponent,
+  type ReactZoomPanPinchContentRef,
+} from "react-zoom-pan-pinch"
 import { projects } from "../lib/data"
 import type { Project } from "../lib/data"
 import { useLang } from "../lib/i18n"
@@ -370,8 +376,40 @@ function ProjectCarousel({
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   const { t, L } = useLang()
   const dialogRef = useRef<HTMLDivElement>(null)
+  const zoomRef = useRef<ReactZoomPanPinchContentRef>(null)
   const [slide, setSlide] = useState(0)
   const [zoomed, setZoomed] = useState(false)
+
+  const imgX = useSpring(0, { stiffness: 420, damping: 36 })
+  const dragMoved = useRef(false)
+
+  const bind = useDrag(
+    ({ down, movement: [mx], velocity: [vx], direction: [dir] }) => {
+      if (!down) {
+        const n = project.screenshots.length
+        if (Math.abs(mx) > 80 || vx > 0.6) {
+          setSlide((s) => (dir > 0 ? (s - 1 + n) % n : (s + 1) % n))
+        }
+        imgX.set(0)
+      } else {
+        dragMoved.current = true
+        imgX.set(mx)
+      }
+    },
+    { axis: "x", filterTaps: true },
+  )
+
+  useEffect(() => {
+    zoomRef.current?.resetTransform()
+  }, [slide])
+
+  const handleImgClick = () => {
+    if (dragMoved.current) {
+      dragMoved.current = false
+      return
+    }
+    setZoomed(true)
+  }
 
   useEffect(() => {
     document.body.style.overflow = "hidden"
@@ -467,12 +505,18 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
           >
             <MagnifyingGlassPlus size={16} weight="bold" />
           </button>
-          <div className="relative size-full cursor-zoom-in" onClick={() => setZoomed(true)}>
-            <BlurImage
-              src={project.screenshots[slide]}
-              alt={`${project.title} ${slide + 1}`}
-              imgClassName="transition-transform duration-300"
-            />
+          <div
+            className={`relative size-full ${hasSlides ? "cursor-grab active:cursor-grabbing" : "cursor-zoom-in"}`}
+            onClick={handleImgClick}
+            {...(hasSlides ? bind() : {})}
+          >
+            <motion.div style={{ x: imgX }} className="size-full">
+              <BlurImage
+                src={project.screenshots[slide]}
+                alt={`${project.title} ${slide + 1}`}
+                imgClassName="transition-transform duration-300 select-none"
+              />
+            </motion.div>
           </div>
           <button
             type="button"
@@ -652,17 +696,38 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
             aria-modal="true"
             aria-label={project.title}
           >
-            <motion.img
-              key={slide}
-              src={project.screenshots[slide]}
-              alt={`${project.title} ${slide + 1}`}
-              className="max-h-full max-w-full cursor-zoom-out rounded-lg object-contain shadow-2xl"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              onClick={(e) => e.stopPropagation()}
-            />
+            <TransformWrapper
+              ref={zoomRef}
+              initialScale={1}
+              minScale={1}
+              maxScale={4}
+              centerOnInit
+              doubleClick={{ mode: "zoomIn" }}
+              wheel={{ step: 0.15 }}
+            >
+              <TransformComponent
+                wrapperStyle={{ width: "100%", height: "100%" }}
+                contentStyle={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <motion.img
+                  key={slide}
+                  src={project.screenshots[slide]}
+                  alt={`${project.title} ${slide + 1}`}
+                  className="max-h-[90dvh] max-w-[90vw] select-none rounded-lg object-contain shadow-2xl"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  draggable={false}
+                />
+              </TransformComponent>
+            </TransformWrapper>
             <button
               type="button"
               onClick={() => setZoomed(false)}

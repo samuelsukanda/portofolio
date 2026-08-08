@@ -1,12 +1,13 @@
 import { motion } from "motion/react"
+import type { ComponentType, ElementType } from "react"
 import { ArrowUpRight, Code, HardDrives, Palette, Wrench } from "@phosphor-icons/react"
-import { services } from "../lib/data"
+import { services, type IconProps } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { SectionHeading } from "./SectionHeading"
 import { SpotlightCard } from "./SpotlightCard"
 import { useSectionReveal } from "../lib/useSectionReveal"
 
-const iconMap: Record<string, React.ElementType> = {
+const iconMap: Record<string, ElementType> = {
   code: Code,
   server: HardDrives,
   palette: Palette,
@@ -29,7 +30,7 @@ export function Services() {
 
         <div className="mt-12 grid gap-5 md:grid-cols-2">
           {services.map((service, i) => {
-            const Icon = iconMap[service.icon] ?? Code
+            const Icon = (iconMap[service.icon] ?? Code) as ComponentType<IconProps>
             return (
               <motion.div
                 key={service.title.id}

@@ -1,6 +1,7 @@
 import { useRef } from "react"
+import type { ComponentType } from "react"
 import { motion, useInView } from "motion/react"
-import { skills } from "../lib/data"
+import { skills, type IconProps } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { SectionHeading } from "./SectionHeading"
 import { SpotlightCard } from "./SpotlightCard"
@@ -10,7 +11,7 @@ function SkillCard({ skill, index }: { skill: (typeof skills)[number]; index: nu
   const { L } = useLang()
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.4 })
-  const Icon = skill.icon
+  const Icon = skill.icon as ComponentType<IconProps>
 
   return (
     <motion.div

@@ -1,12 +1,61 @@
-import { motion } from "motion/react"
+import { useEffect, useRef } from "react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { experience } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { SectionHeading } from "./SectionHeading"
 import { useSectionReveal } from "../lib/useSectionReveal"
 
+gsap.registerPlugin(ScrollTrigger)
+
 export function Experience() {
   const { t, L } = useLang()
   const sectionRef = useSectionReveal<HTMLElement>()
+  const listRef = useRef<HTMLOListElement>(null)
+  const lineRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const items = listRef.current?.querySelectorAll<HTMLLIElement>("li")
+    if (!items?.length) return
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        items,
+        { opacity: 0, x: -36 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          stagger: 0.14,
+          scrollTrigger: {
+            trigger: listRef.current,
+            start: "top 78%",
+            toggleActions: "play none none none",
+          },
+        },
+      )
+
+      if (lineRef.current) {
+        gsap.fromTo(
+          lineRef.current,
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: listRef.current,
+              start: "top 80%",
+              end: "bottom 70%",
+              scrub: 0.6,
+            },
+          },
+        )
+      }
+    })
+
+    return () => ctx.revert()
+  }, [])
 
   return (
     <section id="experience" ref={sectionRef} className="section-reveal border-t border-line">
@@ -20,19 +69,13 @@ export function Experience() {
 
         <div className="relative mt-12">
           <div
-            className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-accent/50 via-line to-transparent"
+            ref={lineRef}
+            className="absolute left-[7px] top-2 bottom-2 w-px origin-top bg-gradient-to-b from-accent/50 via-line to-transparent"
             aria-hidden
           />
-          <ol className="space-y-8">
-            {experience.map((exp, i) => (
-              <motion.li
-                key={exp.period}
-                className="relative pl-10"
-                initial={{ opacity: 0, x: -24 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              >
+          <ol ref={listRef} className="space-y-8">
+            {experience.map((exp) => (
+              <li key={exp.period} className="relative pl-10">
                 <span className="absolute left-0 top-1.5 flex size-4 items-center justify-center">
                   <span className="size-3 rounded-full border-2 border-accent bg-bg" />
                 </span>
@@ -58,7 +101,7 @@ export function Experience() {
                     ))}
                   </div>
                 </div>
-              </motion.li>
+              </li>
             ))}
           </ol>
         </div>

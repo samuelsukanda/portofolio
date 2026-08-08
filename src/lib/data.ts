@@ -15,6 +15,12 @@ import {
 import { HardDrives } from "@phosphor-icons/react"
 import type { LocaleString } from "./i18n"
 
+export type IconProps = {
+  size?: number
+  weight?: string
+  className?: string
+}
+
 export const profile = {
   name: "Samuel Sukanda",
   initials: "SS",

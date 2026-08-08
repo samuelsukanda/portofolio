@@ -1,11 +1,12 @@
 import { useRef } from "react"
+import type { ComponentType } from "react"
 import {
   motion,
   useAnimationFrame,
   useMotionValue,
   useReducedMotion,
 } from "motion/react"
-import { skills } from "../lib/data"
+import { skills, type IconProps } from "../lib/data"
 
 export function TechMarquee() {
   const reduce = useReducedMotion()
@@ -31,7 +32,7 @@ export function TechMarquee() {
   }
 
   const items = skills.map((s) => {
-    const Icon = s.icon
+    const Icon = s.icon as ComponentType<IconProps>
     return (
       <div
         key={s.name}

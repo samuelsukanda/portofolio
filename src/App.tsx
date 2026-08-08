@@ -1,5 +1,7 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react"
 import Lenis from "lenis"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Nav } from "./components/Nav"
 import { Hero } from "./components/Hero"
 import { About } from "./components/About"
@@ -13,6 +15,8 @@ import { Preloader } from "./components/Preloader"
 import { TechMarquee } from "./components/TechMarquee"
 import { BackToTop } from "./components/BackToTop"
 import { useLang } from "./lib/i18n"
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Projects = lazy(() =>
   import("./components/Projects").then((m) => ({ default: m.Projects })),
@@ -44,6 +48,7 @@ export default function App() {
     if (!isRoot) return
     const lenis = new Lenis({ lerp: 0.1, smoothWheel: true })
     lenisRef.current = lenis
+    lenis.on("scroll", ScrollTrigger.update)
     let raf = 0
     const loop = (time: number) => {
       lenis.raf(time)
@@ -72,6 +77,7 @@ export default function App() {
     return () => {
       cancelAnimationFrame(raf)
       document.removeEventListener("click", onClick)
+      lenis.off("scroll", ScrollTrigger.update)
       lenis.destroy()
       lenisRef.current = null
     }

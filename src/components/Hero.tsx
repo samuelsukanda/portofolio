@@ -140,7 +140,7 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        <motion.div className="lg:col-span-5" style={{ y: cardY }}>
+        <motion.div className="relative lg:col-span-5" style={{ y: cardY }}>
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}

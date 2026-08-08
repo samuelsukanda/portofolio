@@ -1,6 +1,8 @@
 import { motion } from "motion/react"
+import Lottie from "lottie-react"
 import { ArrowLeft } from "@phosphor-icons/react"
 import { useLang } from "../lib/i18n"
+import pulse from "../assets/lottie/pulse.json"
 
 export function NotFound() {
   const { t } = useLang()
@@ -13,7 +15,14 @@ export function NotFound() {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="text-center"
       >
-        <p className="text-gradient-accent font-mono text-8xl font-bold tracking-tight md:text-9xl">
+        <Lottie
+          animationData={pulse}
+          loop
+          autoplay
+          className="mx-auto size-24 md:size-28"
+          aria-hidden
+        />
+        <p className="text-gradient-accent mt-4 font-mono text-8xl font-bold tracking-tight md:text-9xl">
           {t.notFound.code}
         </p>
         <h1 className="mt-4 text-2xl font-semibold tracking-tight md:text-3xl">
