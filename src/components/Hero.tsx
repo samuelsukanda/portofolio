@@ -5,6 +5,8 @@ import {
   useMotionValue,
   useSpring,
   useMotionTemplate,
+  useScroll,
+  useTransform,
 } from "motion/react"
 import { ArrowDownRight, ArrowUpRight, ArrowRight } from "@phosphor-icons/react"
 import { profile } from "../lib/data"
@@ -25,6 +27,14 @@ export function Hero() {
   const sx = useSpring(mx, { stiffness: 350, damping: 25, mass: 0.1 })
   const sy = useSpring(my, { stiffness: 350, damping: 25, mass: 0.1 })
   const glowBg = useMotionTemplate`radial-gradient(600px at ${sx}% ${sy}%, var(--glow), transparent 70%)`
+
+  const { scrollYProgress, scrollY } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  })
+  const cardY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 80])
+  const glowY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 120])
+  const scrollOpacity = useTransform(scrollY, [0, 240], [1, 0])
 
   const handleMove = (e: React.MouseEvent) => {
     const rect = sectionRef.current?.getBoundingClientRect()
@@ -61,16 +71,14 @@ export function Hero() {
       />
 
       {!reduce && (
-        <>
-          <div
-            className="pointer-events-none absolute -left-24 top-24 size-72 animate-float rounded-full bg-accent/10 blur-3xl"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute -right-32 bottom-0 size-80 animate-float-delay rounded-full bg-accent-2/10 blur-3xl"
-            aria-hidden
-          />
-        </>
+        <motion.div
+          className="pointer-events-none absolute inset-0"
+          style={{ y: glowY }}
+          aria-hidden
+        >
+          <div className="absolute -left-24 top-24 size-72 animate-float rounded-full bg-accent/10 blur-3xl" />
+          <div className="absolute -right-32 bottom-0 size-80 animate-float-delay rounded-full bg-accent-2/10 blur-3xl" />
+        </motion.div>
       )}
 
       <div className="container-site relative grid min-h-[calc(100dvh-4rem)] items-center gap-14 pt-24 pb-16 lg:grid-cols-12 lg:gap-10 lg:pt-24 lg:pb-10">
@@ -132,15 +140,32 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        <motion.div
-          className="lg:col-span-5"
-          initial={reduce ? false : { opacity: 0, y: 32 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease }}
-        >
-          <ProfileCard />
+        <motion.div className="lg:col-span-5" style={{ y: cardY }}>
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease }}
+          >
+            <ProfileCard />
+          </motion.div>
         </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        style={{ opacity: scrollOpacity }}
+        className="pointer-events-none absolute inset-x-0 bottom-5 z-10 flex flex-col items-center gap-2"
+        aria-hidden
+      >
+        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-3">Scroll</span>
+        <div className="relative h-9 w-px overflow-hidden bg-line">
+          <motion.span
+            className="absolute left-0 top-0 h-4 w-px bg-accent"
+            animate={{ y: [-16, 44] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+      </motion.div>
     </section>
   )
 }

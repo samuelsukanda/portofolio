@@ -13,12 +13,12 @@ type SectionHeadingProps = {
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.06 } },
+  show: { transition: { staggerChildren: 0.028, delayChildren: 0.1 } },
 }
 
-const maskReveal = {
-  hidden: { y: "115%" },
-  show: { y: "0%", transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } },
+const charReveal = {
+  hidden: { y: "110%" },
+  show: { y: "0%", transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] as const } },
 }
 
 const fade = {
@@ -53,14 +53,21 @@ export function SectionHeading({
         </motion.p>
       )}
       <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl lg:text-5xl">
-        {words.map((word, i) => (
-          <Fragment key={`${word}-${i}`}>
-            <span className="inline-block overflow-hidden align-bottom pb-1 -mb-1">
-              <motion.span className="inline-block will-change-transform" variants={maskReveal}>
-                {word}
-              </motion.span>
+        {words.map((word, wi) => (
+          <Fragment key={wi}>
+            {wi > 0 && <span className="inline-block w-[0.28em]" aria-hidden />}
+            <span className="inline-block whitespace-nowrap align-bottom">
+              {word.split("").map((char, i) => (
+                <span
+                  key={i}
+                  className="inline-block overflow-hidden align-bottom pb-[0.15em] -mb-[0.15em]"
+                >
+                  <motion.span className="inline-block will-change-transform" variants={charReveal}>
+                    {char}
+                  </motion.span>
+                </span>
+              ))}
             </span>
-            {i < words.length - 1 ? " " : null}
           </Fragment>
         ))}
       </h2>

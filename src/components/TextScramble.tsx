@@ -5,11 +5,12 @@ type TextScrambleProps = {
   text: string
   className?: string
   delay?: number
+  active?: boolean
 }
 
 const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*"
 
-export function TextScramble({ text, className, delay = 0 }: TextScrambleProps) {
+export function TextScramble({ text, className, delay = 0, active = true }: TextScrambleProps) {
   const reduce = useReducedMotion()
   const [display, setDisplay] = useState(reduce ? text : "")
   const [started, setStarted] = useState(false)
@@ -56,10 +57,11 @@ export function TextScramble({ text, className, delay = 0 }: TextScrambleProps) 
       setDisplay(text)
       return
     }
+    if (!active) return
 
     const timer = setTimeout(() => setStarted(true), delay)
     return () => clearTimeout(timer)
-  }, [delay, reduce, text])
+  }, [delay, reduce, text, active])
 
   useEffect(() => {
     if (!started || reduce) return

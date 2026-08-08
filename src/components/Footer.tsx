@@ -1,6 +1,4 @@
-import { motion } from "motion/react"
 import {
-  ArrowUp,
   GithubLogo,
   LinkedinLogo,
   EnvelopeSimple,
@@ -74,16 +72,6 @@ export function Footer() {
           <p className="text-sm text-ink-3">
             © {year}. All rights reserved.
           </p>
-          <motion.a
-            href="#top"
-            aria-label={t.footer.backToTop}
-            whileHover={{ y: -2 }}
-            whileTap={{ y: 0 }}
-            className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm text-ink-2 transition-colors hover:border-accent hover:text-accent"
-          >
-            {t.footer.backToTop}
-            <ArrowUp size={14} weight="bold" />
-          </motion.a>
         </div>
       </div>
     </footer>

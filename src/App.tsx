@@ -11,6 +11,7 @@ import { NotFound } from "./components/NotFound"
 import { Seo } from "./components/Seo"
 import { Preloader } from "./components/Preloader"
 import { TechMarquee } from "./components/TechMarquee"
+import { BackToTop } from "./components/BackToTop"
 import { useLang } from "./lib/i18n"
 
 const Projects = lazy(() =>
@@ -110,6 +111,7 @@ export default function App() {
         </Suspense>
       </main>
       <Footer />
+      <BackToTop />
     </div>
   )
 }
