@@ -2,24 +2,31 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <title>Samuel Sukanda - Web Developer</title>
+    <title>Samuel Sukanda - Web Developer di Subang | Laravel, React, TypeScript</title>
     <meta
       name="description"
-      content="Samuel Sukanda, web developer dari Subang. Membangun website dan aplikasi web modern, cepat, dan andal dengan Laravel, React, dan TypeScript."
+      content="Samuel Sukanda, Web Developer dari Subang, Indonesia. Jasa pembuatan website, backend, dan frontend development dengan Laravel, React, dan TypeScript. Lihat portofolio proyek dan hubungi saya."
     />
+    <meta name="author" content="Samuel Sukanda" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="geo.region" content="ID-JB" />
+    <meta name="geo.placename" content="Subang, Jawa Barat, Indonesia" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f4" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c0c10" />
+    <meta name="color-scheme" content="dark light" />
 
-    <link rel="preconnect" href="https://rakapradana.dev" />
-    <link rel="preload" as="image" href="/images/hero.svg" />
+    <link rel="canonical" href="https://rakapradana.dev/" />
+    <link rel="preload" as="image" href="/images/hero.svg" fetchpriority="high" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Samuel Sukanda" />
-    <meta property="og:title" content="Samuel Sukanda - Web Developer" />
+    <meta property="og:title" content="Samuel Sukanda - Web Developer di Subang" />
     <meta
       property="og:description"
-      content="Membangun website dan aplikasi web yang modern, cepat, dan andal."
+      content="Membangun website dan aplikasi web yang modern, cepat, dan andal dengan Laravel, React, dan TypeScript."
     />
     <meta property="og:url" content="https://rakapradana.dev/" />
     <meta property="og:locale" content="id_ID" />
@@ -31,31 +38,156 @@
     <meta property="og:image:type" content="image/png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Samuel Sukanda - Web Developer" />
+    <meta name="twitter:title" content="Samuel Sukanda - Web Developer di Subang" />
     <meta
       name="twitter:description"
       content="Membangun website dan aplikasi web yang modern, cepat, dan andal."
     />
     <meta name="twitter:image" content="https://rakapradana.dev/og.png" />
+    <meta name="twitter:url" content="https://rakapradana.dev/" />
 
-    <meta name="theme-color" content="#0c0c10" />
-    <meta name="color-scheme" content="dark light" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://rakapradana.dev/" />
-
-    <script type="application/ld+json">
+    <script type="application/ld+json" id="seo-jsonld">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Samuel Sukanda",
-        "url": "https://rakapradana.dev/",
-        "image": "https://rakapradana.dev/og.svg",
-        "jobTitle": "Web Developer",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Subang, Indonesia"
-        },
-        "sameAs": ["https://github.com/", "https://www.linkedin.com/"]
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://rakapradana.dev/#person",
+            "name": "Samuel Sukanda",
+            "url": "https://rakapradana.dev/",
+            "image": "https://rakapradana.dev/og.png",
+            "description": "Web Developer dari Subang, Indonesia. Membangun website dan aplikasi web modern, cepat, dan andal dengan Laravel, React, dan TypeScript.",
+            "jobTitle": "Web Developer",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Subang",
+              "addressRegion": "Jawa Barat",
+              "addressCountry": "ID"
+            },
+            "nationality": "Indonesia",
+            "knowsAbout": ["Laravel", "React", "TypeScript", "Tailwind CSS", "PHP", "MySQL", "PostgreSQL", "Redis", "Linux", "Git"],
+            "sameAs": [
+              "https://github.com/samuelsukanda",
+              "https://www.linkedin.com/"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://rakapradana.dev/#website",
+            "url": "https://rakapradana.dev/",
+            "name": "Samuel Sukanda - Web Developer",
+            "description": "Portofolio Samuel Sukanda, Web Developer dari Subang. Jasa pembuatan website, backend, dan frontend development.",
+            "inLanguage": "id",
+            "publisher": { "@id": "https://rakapradana.dev/#person" }
+          },
+          {
+            "@type": "ItemList",
+            "name": "Proyek Portofolio",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                  "@type": "CreativeWork",
+                  "name": "Sigercep",
+                  "description": "Platform tracking paket pengiriman dengan status real-time dan laporan per cabang."
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                  "@type": "CreativeWork",
+                  "name": "Helpdesk",
+                  "description": "Sistem tiket bantuan internal dengan SLA, penugasan otomatis, dan board kanban."
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                  "@type": "CreativeWork",
+                  "name": "Wedding Planner",
+                  "description": "Platform manajemen acara pernikahan: vendor, rundown, undangan digital, dan anggaran."
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "item": {
+                  "@type": "CreativeWork",
+                  "name": "Photo Booth",
+                  "description": "Aplikasi photo booth untuk event: ambil foto, pilih bingkai, cetak, dan unduh via kode unik."
+                }
+              }
+            ]
+          },
+          {
+            "@type": "Service",
+            "name": "Web Development",
+            "description": "Membangun website dan aplikasi web yang modern, responsif, dan mudah dikembangkan.",
+            "provider": { "@id": "https://rakapradana.dev/#person" },
+            "areaServed": "ID"
+          },
+          {
+            "@type": "Service",
+            "name": "Backend Development",
+            "description": "Mengembangkan backend yang aman, cepat, dan siap mendukung kebutuhan aplikasi.",
+            "provider": { "@id": "https://rakapradana.dev/#person" },
+            "areaServed": "ID"
+          },
+          {
+            "@type": "Service",
+            "name": "Frontend Development",
+            "description": "Mewujudkan desain menjadi antarmuka yang responsif, interaktif, dan optimal di berbagai perangkat.",
+            "provider": { "@id": "https://rakapradana.dev/#person" },
+            "areaServed": "ID"
+          },
+          {
+            "@type": "Service",
+            "name": "Maintenance & Optimization",
+            "description": "Menjaga aplikasi tetap stabil, aman, dan memiliki performa yang optimal.",
+            "provider": { "@id": "https://rakapradana.dev/#person" },
+            "areaServed": "ID"
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Apakah Anda tersedia untuk proyek?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Ya, saya terbuka untuk proyek freelance, remote, maupun on-site. Hubungi saya lewat email atau WhatsApp untuk mendiskusikan kebutuhan Anda."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Teknologi apa saja yang Anda kuasai?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Saya fokus di ekosistem Laravel untuk backend serta React, TypeScript, dan Tailwind CSS untuk frontend, didukung MySQL, PostgreSQL, Redis, dan Linux untuk infrastruktur."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Berapa lama waktu pengerjaan sebuah website?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Bergantung pada cakupan. Landing page atau company profile umumnya 1-2 minggu, sedangkan aplikasi web dengan fitur kompleks bisa 4-8 minggu atau lebih."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Apakah Anda menyediakan layanan maintenance?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Ya. Saya menyediakan perbaikan bug, pembaruan keamanan, optimasi performa, dan penambahan fitur untuk menjaga aplikasi tetap stabil."
+                }
+              }
+            ]
+          }
+        ]
       }
     </script>
 

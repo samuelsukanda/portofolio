@@ -8,8 +8,8 @@ import { About } from "./components/About"
 import { Skills } from "./components/Skills"
 import { Experience } from "./components/Experience"
 import { Services } from "./components/Services"
+import { Faq } from "./components/Faq"
 import { Footer } from "./components/Footer"
-import { NotFound } from "./components/NotFound"
 import { Seo } from "./components/Seo"
 import { Preloader } from "./components/Preloader"
 import { TechMarquee } from "./components/TechMarquee"
@@ -23,6 +23,9 @@ const Projects = lazy(() =>
 )
 const Contact = lazy(() =>
   import("./components/Contact").then((m) => ({ default: m.Contact })),
+)
+const NotFound = lazy(() =>
+  import("./components/NotFound").then((m) => ({ default: m.NotFound })),
 )
 
 function SectionFallback() {
@@ -87,7 +90,9 @@ export default function App() {
     return (
       <div id="top" className="min-h-[100dvh] overflow-x-clip">
         <Seo />
-        <NotFound />
+        <Suspense fallback={null}>
+          <NotFound />
+        </Suspense>
       </div>
     )
   }
@@ -112,6 +117,7 @@ export default function App() {
           <Projects />
         </Suspense>
         <Services />
+        <Faq />
         <Suspense fallback={<SectionFallback />}>
           <Contact />
         </Suspense>

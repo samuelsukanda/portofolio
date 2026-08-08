@@ -82,6 +82,12 @@ export const ui = {
       description: "Layanan pengembangan web dari perencanaan hingga implementasi.",
       discuss: "Hubungi Saya",
     },
+    faq: {
+      eyebrow: "FAQ",
+      title: "Pertanyaan yang Sering Diajukan",
+      description:
+        "Jawaban singkat atas pertanyaan umum seputar layanan, teknologi, dan cara kerja saya.",
+    },
     testimonials: {
       eyebrow: "Testimoni",
       title: "Apa kata klien",
@@ -95,8 +101,7 @@ export const ui = {
       title: "Hubungi Saya",
       description:
         "Saya siap membantu mewujudkan ide Anda menjadi solusi digital yang fungsional.",
-      name: "Nama",
-      email: "Email",
+      name: "Nama",      email: "Email",
       message: "Pesan",
       nameError: "Nama minimal 2 karakter.",
       emailError: "Alamat email tidak valid.",
@@ -216,6 +221,11 @@ export const ui = {
       title: "What I Do",
       description: "Web development services from planning to implementation.",
       discuss: "Contact Me",
+    },
+    faq: {
+      eyebrow: "FAQ",
+      title: "Frequently Asked Questions",
+      description: "Short answers to common questions about my services, tech stack, and how I work.",
     },
     testimonials: {
       eyebrow: "Testimonials",
@@ -337,6 +347,7 @@ export type UiDict = {
     nextCard: string
   }
   services: { eyebrow: string; title: string; description: string; discuss: string }
+  faq: { eyebrow: string; title: string; description: string }
   testimonials: { eyebrow: string; title: string; prev: string; next: string; view: string; rating: string }
   contact: {
     eyebrow: string

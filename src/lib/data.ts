@@ -31,7 +31,7 @@ export const profile = {
   } as LocaleString,
   location: "Subang, Indonesia",
   email: "samuelsukanda24@gmail.com",
-  whatsapp: "https://wa.me/0895396829484",
+  whatsapp: "https://wa.me/62895396829484",
   socials: [
     { label: "GitHub", url: "https://github.com/samuelsukanda" },
     { label: "LinkedIn", url: "https://www.linkedin.com/" },
@@ -455,6 +455,39 @@ export const testimonials: Testimonial[] = [
     review: {
       id: "Platform-nya langsung dipakai klien tanpa pelatihan panjang. Proses pengerjaannya juga sangat terstruktur.",
       en: "Clients used the platform right away without lengthy training. The process was also very structured.",
+    },
+  },
+]
+
+export type Faq = { q: LocaleString; a: LocaleString }
+
+export const faqs: Faq[] = [
+  {
+    q: { id: "Apakah Anda tersedia untuk proyek?", en: "Are you available for projects?" },
+    a: {
+      id: "Ya, saya terbuka untuk proyek freelance, remote, maupun on-site. Hubungi saya lewat email atau WhatsApp untuk mendiskusikan kebutuhan Anda.",
+      en: "Yes, I'm open to freelance, remote, and on-site projects. Reach out via email or WhatsApp to discuss your needs.",
+    },
+  },
+  {
+    q: { id: "Teknologi apa saja yang Anda kuasai?", en: "What technologies do you use?" },
+    a: {
+      id: "Saya fokus di ekosistem Laravel untuk backend serta React, TypeScript, dan Tailwind CSS untuk frontend, didukung MySQL, PostgreSQL, Redis, dan Linux untuk infrastruktur.",
+      en: "I focus on Laravel for the backend and React, TypeScript, and Tailwind CSS for the frontend, backed by MySQL, PostgreSQL, Redis, and Linux for infrastructure.",
+    },
+  },
+  {
+    q: { id: "Berapa lama waktu pengerjaan sebuah website?", en: "How long does building a website take?" },
+    a: {
+      id: "Bergantung pada cakupan. Landing page atau company profile umumnya 1–2 minggu, sedangkan aplikasi web dengan fitur kompleks bisa 4–8 minggu atau lebih.",
+      en: "It depends on scope. Landing pages or company profiles usually take 1–2 weeks, while web apps with complex features can take 4–8 weeks or more.",
+    },
+  },
+  {
+    q: { id: "Apakah Anda menyediakan layanan maintenance?", en: "Do you offer maintenance services?" },
+    a: {
+      id: "Ya. Saya menyediakan perbaikan bug, pembaruan keamanan, optimasi performa, dan penambahan fitur untuk menjaga aplikasi tetap stabil.",
+      en: "Yes. I provide bug fixes, security updates, performance optimization, and feature enhancements to keep your app stable.",
     },
   },
 ]

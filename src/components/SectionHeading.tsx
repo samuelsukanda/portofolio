@@ -1,5 +1,6 @@
 import { Fragment } from "react"
 import { motion } from "motion/react"
+import { useLang } from "../lib/i18n"
 
 type Tone = "blue" | "emerald" | "violet" | "amber" | "rose"
 
@@ -9,6 +10,7 @@ type SectionHeadingProps = {
   description?: string
   align?: "left" | "center"
   tone?: Tone
+  titleClassName?: string
 }
 
 const container = {
@@ -32,12 +34,15 @@ export function SectionHeading({
   description,
   align = "left",
   tone = "blue",
+  titleClassName = "",
 }: SectionHeadingProps) {
+  const { lang } = useLang()
   const alignCls = align === "center" ? "mx-auto text-center" : ""
   const words = title.split(" ")
 
   return (
     <motion.div
+      key={lang}
       className={`tone-${tone} max-w-2xl ${alignCls}`}
       variants={container}
       initial="hidden"
@@ -52,7 +57,7 @@ export function SectionHeading({
           {eyebrow}
         </motion.p>
       )}
-      <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl lg:text-5xl">
+      <h2 className={`mt-3 text-3xl font-semibold tracking-tight md:text-4xl lg:text-5xl ${titleClassName}`}>
         {words.map((word, wi) => (
           <Fragment key={wi}>
             {wi > 0 && <span className="inline-block w-[0.28em]" aria-hidden />}
