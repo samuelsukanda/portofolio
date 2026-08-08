@@ -47,21 +47,22 @@ export type Skill = {
   name: string
   icon: ElementType
   description: LocaleString
+  level: number
 }
 
 export const skills: Skill[] = [
-  { name: "Laravel", icon: SiLaravel, description: { id: "API, queue, job, auth, dan arsitektur modular", en: "APIs, queues, jobs, auth, and modular architecture" } },
-  { name: "React", icon: SiReact, description: { id: "SPA, hooks, state management, dan optimasi render", en: "SPAs, hooks, state management, and render optimization" } },
-  { name: "TypeScript", icon: SiTypescript, description: { id: "Tipe aman untuk frontend dan backend", en: "Type safety for frontend and backend" } },
-  { name: "Tailwind CSS", icon: SiTailwindcss, description: { id: "Design system dan antarmuka konsisten", en: "Design systems and consistent interfaces" } },
-  { name: "PHP", icon: SiPhp, description: { id: "Fondasi utama di sisi server", en: "Core server-side foundation" } },
-  { name: "MySQL", icon: SiMysql, description: { id: "Schema design, indeks, dan query kinerja", en: "Schema design, indexes, and performant queries" } },
-  { name: "PostgreSQL", icon: SiPostgresql, description: { id: "Data relasional dan full-text search", en: "Relational data and full-text search" } },
-  { name: "Redis", icon: SiRedis, description: { id: "Cache, session, dan antrian real-time", en: "Cache, sessions, and real-time queues" } },
-  { name: "TrueNAS", icon: HardDrives, description: { id: "Manajemen penyimpanan, NAS, dan backup", en: "Storage management, NAS, and backups" } },
-  { name: "Linux", icon: SiLinux, description: { id: "Setup server, deploy, dan troubleshooting", en: "Server setup, deployment, and troubleshooting" } },
-  { name: "Git", icon: SiGit, description: { id: "Branching, review, dan kolaborasi tim", en: "Branching, review, and team collaboration" } },
-  { name: "Vite", icon: SiVite, description: { id: "Tooling build cepat untuk web modern", en: "Fast build tooling for modern web" } },
+  { name: "Laravel", icon: SiLaravel, level: 90, description: { id: "API, queue, job, auth, dan arsitektur modular", en: "APIs, queues, jobs, auth, and modular architecture" } },
+  { name: "React", icon: SiReact, level: 88, description: { id: "SPA, hooks, state management, dan optimasi render", en: "SPAs, hooks, state management, and render optimization" } },
+  { name: "TypeScript", icon: SiTypescript, level: 82, description: { id: "Tipe aman untuk frontend dan backend", en: "Type safety for frontend and backend" } },
+  { name: "Tailwind CSS", icon: SiTailwindcss, level: 90, description: { id: "Design system dan antarmuka konsisten", en: "Design systems and consistent interfaces" } },
+  { name: "PHP", icon: SiPhp, level: 85, description: { id: "Fondasi utama di sisi server", en: "Core server-side foundation" } },
+  { name: "MySQL", icon: SiMysql, level: 84, description: { id: "Schema design, indeks, dan query kinerja", en: "Schema design, indexes, and performant queries" } },
+  { name: "PostgreSQL", icon: SiPostgresql, level: 72, description: { id: "Data relasional dan full-text search", en: "Relational data and full-text search" } },
+  { name: "Redis", icon: SiRedis, level: 75, description: { id: "Cache, session, dan antrian real-time", en: "Cache, sessions, and real-time queues" } },
+  { name: "TrueNAS", icon: HardDrives, level: 68, description: { id: "Manajemen penyimpanan, NAS, dan backup", en: "Storage management, NAS, and backups" } },
+  { name: "Linux", icon: SiLinux, level: 80, description: { id: "Setup server, deploy, dan troubleshooting", en: "Server setup, deployment, and troubleshooting" } },
+  { name: "Git", icon: SiGit, level: 86, description: { id: "Branching, review, dan kolaborasi tim", en: "Branching, review, and team collaboration" } },
+  { name: "Vite", icon: SiVite, level: 80, description: { id: "Tooling build cepat untuk web modern", en: "Fast build tooling for modern web" } },
 ]
 
 export type Experience = {

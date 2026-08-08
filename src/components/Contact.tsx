@@ -77,7 +77,7 @@ function Field({ id, label, value, onChange, type = "text", error, textarea }: F
 }
 
 export function Contact() {
-  const { t } = useLang()
+  const { t, lang } = useLang()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
@@ -122,8 +122,15 @@ export function Contact() {
     setSubmitError("")
     setStatus("loading")
     if (!contactForm.endpoint) {
-      setStatus("error")
-      setSubmitError(t.contact.notConfigured + profile.email)
+      const greeting = lang === "id" ? "Halo Samuel," : "Hello Samuel,"
+      const from =
+        lang === "id"
+          ? `\n\nDari: ${name}\nEmail: ${email}`
+          : `\n\nFrom: ${name}\nEmail: ${email}`
+      const subject = encodeURIComponent(`[Portfolio] ${name}`)
+      const body = encodeURIComponent(`${greeting}\n\n${message}${from}`)
+      window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`
+      setStatus("success")
       return
     }
     try {

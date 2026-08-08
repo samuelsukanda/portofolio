@@ -17,6 +17,7 @@ export const ui = {
       headlineStart: "Membangun website dan aplikasi web yang",
       headlineAccent: "cepat",
       headlineEnd: " dan responsif.",
+      words: ["cepat", "modern", "andal"],
       viewWork: "Lihat portofolio",
       contact: "Hubungi saya",
       findMe: "Temukan saya",
@@ -33,6 +34,9 @@ export const ui = {
       workItem1: "Menganalisis kebutuhan sebelum memulai pengembangan.",
       workItem2: "Membangun solusi dengan kode yang bersih dan terstruktur.",
       workItem3: "Melakukan pengujian dan optimasi sebelum aplikasi dirilis.",
+      statYears: "Tahun pengalaman",
+      statProjects: "Proyek yang dibangun",
+      statTech: "Teknologi yang dikuasai",
     },
     skills: {
       eyebrow: "Keahlian",
@@ -147,6 +151,7 @@ export const ui = {
       headlineStart: "Building websites and web apps that are",
       headlineAccent: "fast",
       headlineEnd: " and responsive.",
+      words: ["fast", "modern", "reliable"],
       viewWork: "View portfolio",
       contact: "Contact me",
       findMe: "Find me",
@@ -163,6 +168,9 @@ export const ui = {
       workItem1: "Analyzing requirements before starting development.",
       workItem2: "Building solutions with clean, structured code.",
       workItem3: "Testing and optimizing before the app is released.",
+      statYears: "Years of experience",
+      statProjects: "Projects built",
+      statTech: "Technologies mastered",
     },
     skills: {
       eyebrow: "Skills",
@@ -280,6 +288,7 @@ export type UiDict = {
     headlineStart: string
     headlineAccent: string
     headlineEnd: string
+    words: readonly string[]
     viewWork: string
     contact: string
     findMe: string
@@ -295,6 +304,9 @@ export type UiDict = {
     workItem1: string
     workItem2: string
     workItem3: string
+    statYears: string
+    statProjects: string
+    statTech: string
   }
   skills: { eyebrow: string; title: string; description: string }
   experience: { eyebrow: string; title: string; description: string }

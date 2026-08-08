@@ -2,11 +2,17 @@ import { Handshake, Check } from "@phosphor-icons/react"
 import { capabilities } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { Reveal, RevealItem } from "./Reveal"
+import { CountUp } from "./CountUp"
 import { useSectionReveal } from "../lib/useSectionReveal"
 
 export function About() {
   const { t, L } = useLang()
   const sectionRef = useSectionReveal<HTMLElement>()
+  const stats = [
+    { value: 2, suffix: "+", label: t.about.statYears },
+    { value: 4, suffix: "+", label: t.about.statProjects },
+    { value: 12, suffix: "+", label: t.about.statTech },
+  ]
 
   return (
     <section id="about" ref={sectionRef} className="section-reveal relative border-t border-line">
@@ -17,6 +23,25 @@ export function About() {
               {t.about.title}
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-ink-2">{t.about.belief}</p>
+          </RevealItem>
+        </Reveal>
+
+        <Reveal className="mt-12">
+          <RevealItem>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {stats.map((s) => (
+                <div
+                  key={s.label}
+                  className="rounded-card border border-line bg-surface p-6 text-center shadow-sm"
+                >
+                  <p className="text-gradient-accent text-4xl font-semibold tracking-tight md:text-5xl">
+                    <CountUp value={String(s.value)} />
+                    {s.suffix}
+                  </p>
+                  <p className="mt-2 text-sm text-ink-2">{s.label}</p>
+                </div>
+              ))}
+            </div>
           </RevealItem>
         </Reveal>
 

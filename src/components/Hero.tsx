@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
   motion,
   useReducedMotion,
@@ -79,7 +79,7 @@ export function Hero() {
             variants={item}
             className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl"
           >
-            {t.hero.headlineStart} <span className="text-gradient-accent italic">{t.hero.headlineAccent}</span>
+            {t.hero.headlineStart} <TypeWriter words={t.hero.words} reduce={reduce} />
             {t.hero.headlineEnd}
           </motion.h1>
 
@@ -142,6 +142,44 @@ export function Hero() {
         </motion.div>
       </div>
     </section>
+  )
+}
+
+function TypeWriter({ words, reduce }: { words: readonly string[]; reduce: boolean | null }) {
+  const [text, setText] = useState("")
+  const [index, setIndex] = useState(0)
+  const [deleting, setDeleting] = useState(false)
+
+  useEffect(() => {
+    if (reduce) {
+      setText(words[0] ?? "")
+      return
+    }
+    const word = words[index % words.length]
+    let timeout: number | undefined
+    if (!deleting && text === word) {
+      timeout = window.setTimeout(() => setDeleting(true), 1800)
+    } else if (deleting && text === "") {
+      setDeleting(false)
+      setIndex((v) => (v + 1) % words.length)
+    } else {
+      timeout = window.setTimeout(
+        () => setText(deleting ? word.slice(0, text.length - 1) : word.slice(0, text.length + 1)),
+        deleting ? 40 : 90,
+      )
+    }
+    return () => window.clearTimeout(timeout)
+  }, [text, deleting, index, words, reduce])
+
+  return (
+    <span className="text-gradient-accent italic">
+      {text}
+      <span
+        aria-hidden
+        className="ml-1 inline-block h-[0.95em] w-[3px] translate-y-[0.12em] rounded-full bg-current align-baseline"
+        style={{ animation: "cursor-blink 1.1s steps(2) infinite" }}
+      />
+    </span>
   )
 }
 

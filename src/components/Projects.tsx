@@ -5,6 +5,8 @@ import {
   animate,
   useAnimationFrame,
   useMotionValue,
+  useSpring,
+  useMotionTemplate,
 } from "motion/react"
 import {
   ArrowUpRight,
@@ -64,46 +66,51 @@ function ProjectCard({
   onCardClick: (p: Project) => void
 }) {
   const { L } = useLang()
-  const imgRef = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  const rx = useMotionValue(0)
+  const ry = useMotionValue(0)
+  const gx = useMotionValue(50)
+  const gy = useMotionValue(50)
+  const srx = useSpring(rx, { stiffness: 300, damping: 22, mass: 0.5 })
+  const sry = useSpring(ry, { stiffness: 300, damping: 22, mass: 0.5 })
+  const glareBg = useMotionTemplate`radial-gradient(560px circle at ${gx}% ${gy}%, rgba(255,255,255,0.09), transparent 45%)`
 
   const onMove = (e: React.MouseEvent) => {
-    const el = imgRef.current
+    const el = cardRef.current
     if (!el) return
     const rect = el.getBoundingClientRect()
     const px = (e.clientX - rect.left) / rect.width - 0.5
     const py = (e.clientY - rect.top) / rect.height - 0.5
-    el.style.setProperty("--px", `${px * 10}px`)
-    el.style.setProperty("--py", `${py * 10}px`)
+    rx.set(py * -8)
+    ry.set(px * 10)
+    gx.set((px + 0.5) * 100)
+    gy.set((py + 0.5) * 100)
   }
 
   const onLeave = () => {
-    const el = imgRef.current
-    if (!el) return
-    el.style.setProperty("--px", "0px")
-    el.style.setProperty("--py", "0px")
+    rx.set(0)
+    ry.set(0)
+    gx.set(50)
+    gy.set(50)
   }
 
   return (
     <article className={`${cardWidth} shrink-0`}>
-      <div
+      <motion.div
+        ref={cardRef}
         onClick={() => onCardClick(project)}
         onMouseMove={onMove}
         onMouseLeave={onLeave}
-        className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-card border border-line bg-surface shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-accent/40 hover:shadow-lg"
+        style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
+        whileHover={{ y: -8 }}
+        className="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-card border border-line bg-surface shadow-sm transition-shadow duration-300 hover:border-accent/40 hover:shadow-lg"
       >
-        <div
-          ref={imgRef}
-          className="relative aspect-[16/10] overflow-hidden"
-          style={{ "--px": "0px", "--py": "0px" } as React.CSSProperties}
-        >
+        <div className="relative aspect-[16/10] overflow-hidden">
           <BlurImage
             src={project.image}
             alt={project.title}
             imgClassName="transition-transform duration-500 group-hover:scale-105"
-            imgStyle={{
-              transform: "translate(var(--px, 0px), var(--py, 0px)) scale(1.12)",
-              transitionProperty: "transform",
-            }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <button
@@ -160,7 +167,13 @@ function ProjectCard({
             </a>
           </div>
         </div>
-      </div>
+
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          style={{ background: glareBg }}
+        />
+      </motion.div>
     </article>
   )
 }
