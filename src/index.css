@@ -120,16 +120,6 @@
     transition: background-color 0.4s ease, color 0.4s ease;
   }
 
-  /* Hide default cursor on desktop when custom cursor is active */
-  @media (hover: hover) and (pointer: fine) {
-    body {
-      cursor: none;
-    }
-    a, button, input, textarea, select, [role="button"] {
-      cursor: none;
-    }
-  }
-
   ::selection {
     background-color: var(--accent);
     color: var(--accent-ink);

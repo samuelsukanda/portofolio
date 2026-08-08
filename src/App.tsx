@@ -10,7 +10,6 @@ import { Footer } from "./components/Footer"
 import { NotFound } from "./components/NotFound"
 import { Seo } from "./components/Seo"
 import { Preloader } from "./components/Preloader"
-import { CustomCursor } from "./components/CustomCursor"
 import { TechMarquee } from "./components/TechMarquee"
 import { useLang } from "./lib/i18n"
 
@@ -90,9 +89,6 @@ export default function App() {
     <div id="top" className="min-h-[100dvh] overflow-x-clip">
       {/* Preloader */}
       {!loaded && <Preloader onComplete={handlePreloaderComplete} />}
-
-      {/* Custom cursor (desktop only) */}
-      <CustomCursor />
 
       <a href="#main" className="skip-link">
         {t.nav.skipToContent}
