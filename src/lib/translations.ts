@@ -6,6 +6,7 @@ export const ui = {
       experience: "Perjalanan",
       work: "Portofolio",
       services: "Layanan",
+      faq: "FAQ",
       contact: "Kontak",
       home: "Beranda",
       openMenu: "Buka menu",
@@ -145,6 +146,7 @@ export const ui = {
       experience: "Journey",
       work: "Portfolio",
       services: "Services",
+      faq: "FAQ",
       contact: "Contact",
       home: "Home",
       openMenu: "Open menu",
@@ -287,6 +289,7 @@ export type UiDict = {
     experience: string
     work: string
     services: string
+    faq: string
     contact: string
     home: string
     openMenu: string

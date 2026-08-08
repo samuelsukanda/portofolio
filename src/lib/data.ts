@@ -38,7 +38,7 @@ export const profile = {
   ],
 }
 
-export type NavLink = { href: string; key: "about" | "skills" | "experience" | "work" | "services" | "contact" }
+export type NavLink = { href: string; key: "about" | "skills" | "experience" | "work" | "services" | "faq" | "contact" }
 
 export const navLinks: NavLink[] = [
   { href: "#about", key: "about" },
@@ -46,6 +46,7 @@ export const navLinks: NavLink[] = [
   { href: "#experience", key: "experience" },
   { href: "#work", key: "work" },
   { href: "#services", key: "services" },
+  { href: "#faq", key: "faq" },
   { href: "#contact", key: "contact" },
 ]
 

@@ -46,15 +46,18 @@ export function Nav() {
 
   useEffect(() => {
     const updateActive = () => {
-      const probe = window.scrollY + window.innerHeight * 0.4
+      const probe = window.scrollY + window.innerHeight * 0.25
       let current = ""
+      let last = ""
       for (const link of navLinks) {
         const el = document.querySelector<HTMLElement>(link.href)
         if (!el) continue
         const top = el.getBoundingClientRect().top + window.scrollY
-        if (top <= probe) current = link.href
+        const bottom = top + el.offsetHeight
+        if (top <= probe) last = link.href
+        if (top <= probe && bottom > probe) current = link.href
       }
-      setActive(current)
+      setActive(current || last)
     }
     updateActive()
     window.addEventListener("scroll", updateActive, { passive: true })

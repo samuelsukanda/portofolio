@@ -14,7 +14,7 @@ export function Faq() {
           title={t.faq.title}
           description={t.faq.description}
           tone="emerald"
-          titleClassName="text-[var(--sec)]"
+          titleClassName="text-ink"
         />
 
         <div className="mt-12 grid gap-4">
