@@ -200,6 +200,7 @@ function ProjectCarousel({
   const paused = useRef(false)
   const dragging = useRef(false)
   const moved = useRef(0)
+  const captured = useRef(false)
   const dragStartX = useRef(0)
   const dragStartPointer = useRef(0)
   const pointerId = useRef<number | null>(null)
@@ -247,18 +248,22 @@ function ProjectCarousel({
     dragStartX.current = x.get()
     dragStartPointer.current = e.clientX
     pointerId.current = e.pointerId
-    ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
   }
 
   const onPointerMove = (e: React.PointerEvent) => {
     if (!dragging.current || pointerId.current !== e.pointerId) return
     const dx = e.clientX - dragStartPointer.current
     moved.current = Math.max(moved.current, Math.abs(dx))
+    if (!captured.current && moved.current > 4) {
+      captured.current = true
+      ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
+    }
     x.set(wrap(dragStartX.current + dx))
   }
 
   const endDrag = () => {
     dragging.current = false
+    captured.current = false
     pointerId.current = null
   }
 
