@@ -153,31 +153,11 @@ export const experience: Experience[] = [
   },
   {
     period: "2022",
-    place: { id: "Seminar & Pengembangan", en: "Seminar & Development" },
-    role: { id: "Baparekraf Developer Day", en: "Baparekraf Developer Day" },
-    description: {
-      id: "Mengikuti seminar dan mendapatkan wawasan seputar teknologi, pengembangan aplikasi, dan industri digital",
-      en: "Attended a seminar covering technology, application development, and the digital industry",
-    },
-    tech: ["Web Development"],
-  },
-  {
-    period: "2022",
-    place: { id: "Kursus & Sertifikat", en: "Courses & Certificates" },
-    role: { id: "Dasar Pemrograman Python", en: "Python Programming Fundamentals" },
-    description: {
-      id: "Python Dasar - Digital course Progate Indonesia\nPython - Digitalent Kominfo\nMempelajari dasar-dasar pemrograman python",
-      en: "Python Basics - Digital course Progate Indonesia\nPython - Digitalent Kominfo\nLearning the basics of Python programming",
-    },
-    tech: ["Python"],
-  },
-  {
-    period: "2022",
     place: { id: "Kursus & sertifikat", en: "Courses & certificates" },
-    role: { id: "Dasar Pemrograman Web", en: "Web Development Fundamentals" },
+    role: { id: "Dasar Pemrograman", en: "Development Fundamentals" },
     description: {
-      id: "HTML, CSS & Javascript - Digital course Progate Indonesia\nMempelajari dasar-dasar HTML, CSS dan Javascript",
-      en: "HTML, CSS & Javascript - Digital course Progate Indonesia\nLearning the basics of HTML, CSS, and Javascript",
+      id: "Python Dasar - Digital course Progate Indonesia\nPython - Digitalent Kominfo\nHTML, CSS & Javascript - Digital course Progate Indonesia\nMempelajari dasar-dasar HTML, CSS dan Javascript",
+      en: "Python Basics - Digital course Progate Indonesia\nPython - Digitalent Kominfo\nHTML, CSS & Javascript - Digital course Progate Indonesia\nLearning the basics of HTML, CSS, and Javascript",
     },
     tech: ["HTML", "CSS", "JavaScript"],
   },

@@ -70,7 +70,7 @@ export function Experience() {
         <div className="relative mt-12">
           <div
             ref={lineRef}
-            className="absolute left-[7px] top-2 bottom-2 w-px origin-top bg-gradient-to-b from-accent/50 via-line to-transparent"
+            className="absolute left-[7px] top-2 bottom-2 w-0.5 origin-top rounded-full bg-gradient-to-b from-accent via-accent/60 to-accent/20"
             aria-hidden
           />
           <ol ref={listRef} className="space-y-8">
