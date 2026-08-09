@@ -3,16 +3,16 @@ import {
   SiLaravel,
   SiPhp,
   SiReact,
-  SiTypescript,
+  SiJavascript,
   SiTailwindcss,
   SiMysql,
   SiPostgresql,
+  SiPython,
   SiRedis,
   SiLinux,
-  SiGit,
+  SiTypescript,
   SiVite,
 } from "react-icons/si"
-import { HardDrives } from "@phosphor-icons/react"
 import type { LocaleString } from "./i18n"
 
 export type IconProps = {
@@ -58,18 +58,18 @@ export type Skill = {
 }
 
 export const skills: Skill[] = [
-  { name: "Laravel", icon: SiLaravel, level: 90, description: { id: "API, queue, job, auth, dan arsitektur modular", en: "APIs, queues, jobs, auth, and modular architecture" } },
-  { name: "React", icon: SiReact, level: 88, description: { id: "SPA, hooks, state management, dan optimasi render", en: "SPAs, hooks, state management, and render optimization" } },
-  { name: "TypeScript", icon: SiTypescript, level: 82, description: { id: "Tipe aman untuk frontend dan backend", en: "Type safety for frontend and backend" } },
-  { name: "Tailwind CSS", icon: SiTailwindcss, level: 90, description: { id: "Design system dan antarmuka konsisten", en: "Design systems and consistent interfaces" } },
-  { name: "PHP", icon: SiPhp, level: 85, description: { id: "Fondasi utama di sisi server", en: "Core server-side foundation" } },
-  { name: "MySQL", icon: SiMysql, level: 84, description: { id: "Schema design, indeks, dan query kinerja", en: "Schema design, indexes, and performant queries" } },
-  { name: "PostgreSQL", icon: SiPostgresql, level: 72, description: { id: "Data relasional dan full-text search", en: "Relational data and full-text search" } },
-  { name: "Redis", icon: SiRedis, level: 75, description: { id: "Cache, session, dan antrian real-time", en: "Cache, sessions, and real-time queues" } },
-  { name: "TrueNAS", icon: HardDrives, level: 68, description: { id: "Manajemen penyimpanan, NAS, dan backup", en: "Storage management, NAS, and backups" } },
-  { name: "Linux", icon: SiLinux, level: 80, description: { id: "Setup server, deploy, dan troubleshooting", en: "Server setup, deployment, and troubleshooting" } },
-  { name: "Git", icon: SiGit, level: 86, description: { id: "Branching, review, dan kolaborasi tim", en: "Branching, review, and team collaboration" } },
-  { name: "Vite", icon: SiVite, level: 80, description: { id: "Tooling build cepat untuk web modern", en: "Fast build tooling for modern web" } },
+  { name: "Laravel", icon: SiLaravel, level: 90, description: { id: "REST API · Auth · Queue · Modular", en: "REST API · Auth · Queue · Modular" } },
+  { name: "React", icon: SiReact, level: 88, description: { id: "SPA · Hooks · State · Performa", en: "SPA · Hooks · State · Performance" } },
+  { name: "TypeScript", icon: SiTypescript, level: 86, description: { id: "Type Safety · API · Kode Skalabel", en: "Type Safety · API · Scalable Code" } },
+  { name: "Tailwind CSS", icon: SiTailwindcss, level: 90, description: { id: "UI Responsif · Design System", en: "Responsive UI · Design System" } },
+  { name: "PHP", icon: SiPhp, level: 85, description: { id: "Backend · OOP · REST API", en: "Backend · OOP · REST API" } },
+  { name: "MySQL", icon: SiMysql, level: 84, description: { id: "Indexing · Optimasi Query", en: "Indexing · Query Optimization" } },
+  { name: "PostgreSQL", icon: SiPostgresql, level: 72, description: { id: "DB Relasional · Optimasi Query", en: "Relational DB · Query Optimization" } },
+  { name: "Python", icon: SiPython, level: 75, description: { id: "OOP · Automation · Scripting", en: "OOP · Automation · Scripting" } },
+  { name: "Redis", icon: SiRedis, level: 75, description: { id: "Cache · Session · Queue", en: "Cache · Session · Queue" } },
+  { name: "Linux", icon: SiLinux, level: 80, description: { id: "Server · Deployment · Troubleshooting", en: "Server · Deployment · Troubleshooting" } },
+  { name: "JavaScript", icon: SiJavascript, level: 82, description: { id: "ES6+ · DOM · API · Async", en: "ES6+ · DOM · API · Async" } },
+  { name: "Vite", icon: SiVite, level: 80, description: { id: "Build Tool · Development · Optimasi", en: "Build Tool · Development · Optimization" } },
 ]
 
 export type Experience = {
@@ -82,34 +82,104 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-    period: "2025 - Sekarang",
-    place: { id: "Belajar mandiri", en: "Self-taught" },
-    role: { id: "Full-stack web development", en: "Full-stack web development" },
+    period: "2026 - Sekarang",
+    place: { id: "Pengembangan Aplikasi", en: "Application Development" },
+    role: { id: "Web Portofolio", en: "Portfolio Website" },
     description: {
-      id: "Mendalami Laravel, React, dan TypeScript lewat dokumentasi resmi, kursus online, dan latihan membangun proyek nyata.",
-      en: "Deepening Laravel, React, and TypeScript through official docs, online courses, and hands-on project practice.",
+      id: "Membangun website portofolio pribadi yang responsif dan modern untuk menampilkan proyek, keterampilan, dan pengalaman sebagai web developer.",
+      en: "Built a modern, responsive personal portfolio website to showcase projects, skills, and experience as a web developer.",
     },
-    tech: ["Laravel", "React", "TypeScript"],
+    tech: ["React 19", "TypeScript", "Tailwind CSS v4", "Vite 8", "GSAP"],
+  },
+  {
+    period: "2026",
+    place: { id: "Pengembangan Aplikasi", en: "Application Development" },
+    role: { id: "Wedding Planner", en: "Wedding Planner" },
+    description: {
+      id: "Mengembangkan aplikasi Wedding Planner untuk mengelola berbagai kebutuhan pernikahan, mulai dari checklist persiapan, budget, vendor, hingga data dan agenda pernikahan.",
+      en: "Developed a Wedding Planner application to manage various wedding needs, including preparation checklists, budget, vendors, and wedding data and schedules.",
+    },
+    tech: ["Laravel 13", "PHP 8.3", "Tailwind CSS v4", "Alpine.js", "Vite 8", "MySQL"],
+  },
+  {
+    period: "2026",
+    place: { id: "Pengembangan Aplikasi", en: "Application Development" },
+    role: { id: "Virtual PhotoBooth", en: "Virtual PhotoBooth" },
+    description: {
+      id: "Mengembangkan aplikasi Virtual PhotoBooth untuk mengambil foto dengan webcam, memilih bingkai, hingga mengunduh hasil foto secara langsung untuk kebutuhan acara.",
+      en: "Developed a Virtual PhotoBooth application for taking photos with a webcam, choosing frames, and downloading the photos directly for event needs.",
+    },
+    tech: ["Laravel 13", "PHP 8.5", "Tailwind CSS v4", "TypeScript", "Vite 8", "Vue 3.5", "MySQL", "FrankenPHP 1.12"],
   },
   {
     period: "2025",
-    place: { id: "Proyek pribadi", en: "Personal project" },
-    role: { id: "Membangun website portofolio ini", en: "Building this portfolio website" },
+    place: { id: "Pengembangan & Upgrade Sistem", en: "System Development & Upgrade" },
+    role: { id: "Sigercep Laravel", en: "Sigercep Laravel" },
     description: {
-      id: "Menerapkan dasar frontend: komponen React, desain responsif, dan optimasi performa.",
-      en: "Applying frontend fundamentals: React components, responsive design, and performance optimization.",
+      id: "Merombak Sigercep secara menyeluruh dari PHP menjadi Laravel setelah mengikuti pelatihan. Sistem dikembangkan dengan berbagai fitur baru serta struktur aplikasi yang lebih terorganisir dan mudah dikembangkan.",
+      en: "Completely rebuilt Sigercep from PHP to Laravel after completing the training. The system was enhanced with new features and a more structured, maintainable architecture.",
     },
-    tech: ["React", "Vite", "Tailwind CSS"],
+    tech: ["Laravel 12", "PHP 8.2", "Tailwind CSS v4", "Vite 6", "MySQL"],
   },
   {
-    period: "2024",
-    place: { id: "Kursus & sertifikat", en: "Courses & certificates" },
-    role: { id: "Dasar pemrograman web", en: "Web development fundamentals" },
+    period: "2025",
+    place: { id: "Kursus & Pelatihan", en: "Courses & Training" },
+    role: { id: "Pelatihan Dasar Laravel", en: "Laravel Fundamentals Training" },
     description: {
-      id: "Mulai dari HTML, CSS, dan JavaScript, lalu melanjutkan ke PHP dan MySQL.",
-      en: "Started with HTML, CSS, and JavaScript, then moved on to PHP and MySQL.",
+      id: "Mengikuti pelatihan dasar Laravel di ID-Networkers untuk memperdalam pengembangan aplikasi web menggunakan Laravel.",
+      en: "Completed Laravel fundamentals training at ID-Networkers to deepen web application development skills using Laravel.",
     },
-    tech: ["HTML", "CSS", "JavaScript", "PHP"],
+    tech: ["Laravel", "PHP"],
+  },
+  {
+    period: "2023",
+    place: { id: "Pengembangan Aplikasi", en: "Application Development" },
+    role: { id: "Sigercep", en: "Sigercep" },
+    description: {
+      id: "Mengembangkan aplikasi Sigercep menggunakan PHP untuk mengelola reservasi ruangan dan kendaraan di rumah sakit.",
+      en: "Developed Sigercep using PHP to manage room and vehicle reservations in a hospital.",
+    },
+    tech: ["PHP", "MySQL"],
+  },
+  {
+    period: "2022",
+    place: { id: "Kursus & Sertifikat", en: "Courses & Certificates" },
+    role: { id: "Front-End Development dengan React", en: "Front-End Development with React" },
+    description: {
+      id: "IDCamp x Dicoding\nMempelajari pengembangan web dan membuat aplikasi menggunakan React.",
+      en: "IDCamp x Dicoding\nLearning web development and building applications using React.",
+    },
+    tech: ["React", "JavaScript"],
+  },
+  {
+    period: "2022",
+    place: { id: "Seminar & Pengembangan", en: "Seminar & Development" },
+    role: { id: "Baparekraf Developer Day", en: "Baparekraf Developer Day" },
+    description: {
+      id: "Mengikuti seminar dan mendapatkan wawasan seputar teknologi, pengembangan aplikasi, dan industri digital",
+      en: "Attended a seminar covering technology, application development, and the digital industry",
+    },
+    tech: ["Web Development"],
+  },
+  {
+    period: "2022",
+    place: { id: "Kursus & Sertifikat", en: "Courses & Certificates" },
+    role: { id: "Dasar Pemrograman Python", en: "Python Programming Fundamentals" },
+    description: {
+      id: "Python Dasar - Digital course Progate Indonesia\nPython - Digitalent Kominfo\nMempelajari dasar-dasar pemrograman python",
+      en: "Python Basics - Digital course Progate Indonesia\nPython - Digitalent Kominfo\nLearning the basics of Python programming",
+    },
+    tech: ["Python"],
+  },
+  {
+    period: "2022",
+    place: { id: "Kursus & sertifikat", en: "Courses & certificates" },
+    role: { id: "Dasar Pemrograman Web", en: "Web Development Fundamentals" },
+    description: {
+      id: "HTML, CSS & Javascript - Digital course Progate Indonesia\nMempelajari dasar-dasar HTML, CSS dan Javascript",
+      en: "HTML, CSS & Javascript - Digital course Progate Indonesia\nLearning the basics of HTML, CSS, and Javascript",
+    },
+    tech: ["HTML", "CSS", "JavaScript"],
   },
 ]
 
@@ -328,27 +398,27 @@ export const capabilities: Capability[] = [
     group: { id: "Backend", en: "Backend" },
     items: [
       { id: "Laravel", en: "Laravel" },
-      { id: "MySQL / PostgreSQL", en: "MySQL / PostgreSQL" },
+      { id: "MySQL", en: "MySQL" },
       { id: "Redis", en: "Redis" },
-      { id: "Queue & Jobs", en: "Queue & Jobs" },
+      { id: "REST API", en: "REST API" },
     ],
   },
   {
     group: { id: "Frontend", en: "Frontend" },
     items: [
       { id: "React", en: "React" },
-      { id: "TypeScript", en: "TypeScript" },
       { id: "Tailwind CSS", en: "Tailwind CSS" },
-      { id: "Livewire", en: "Livewire" },
+      { id: "Blade", en: "Blade" },
+      { id: "Vite", en: "Vite" },
     ],
   },
   {
-    group: { id: "Infrastructure", en: "Infrastructure" },
+    group: { id: "Tools & Deployment", en: "Tools & Deployment" },
     items: [
-      { id: "Database", en: "Database" },
-      { id: "Linux server", en: "Linux server" },
+      { id: "Linux", en: "Linux" },
       { id: "Nginx", en: "Nginx" },
-      { id: "Monitoring", en: "Monitoring" },
+      { id: "Git & GitHub", en: "Git & GitHub" },
+      { id: "CI/CD", en: "CI/CD" },
     ],
   },
 ]

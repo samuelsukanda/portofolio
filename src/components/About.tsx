@@ -9,7 +9,7 @@ export function About() {
   const { t, L } = useLang()
   const sectionRef = useSectionReveal<HTMLElement>()
   const stats = [
-    { value: 2, suffix: "+", label: t.about.statYears },
+    { value: 3, suffix: "+", label: t.about.statYears },
     { value: 4, suffix: "+", label: t.about.statProjects },
     { value: 12, suffix: "+", label: t.about.statTech },
   ]

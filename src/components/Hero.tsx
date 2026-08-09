@@ -87,8 +87,11 @@ export function Hero() {
             variants={item}
             className="mt-6 text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl"
           >
-            {t.hero.headlineStart} <TypeWriter words={t.hero.words} reduce={reduce} />
-            {t.hero.headlineEnd}
+            {t.hero.headlineStart}
+            <span className="block">
+              {t.hero.headlineLineTwo} <TypeWriter words={t.hero.words} reduce={reduce} />
+              {t.hero.headlineEnd}
+            </span>
           </motion.h1>
 
           <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-4">

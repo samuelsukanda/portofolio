@@ -89,7 +89,7 @@ export function Experience() {
                       <p className="text-sm text-ink-2">{L(exp.place)}</p>
                     </div>
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-2">{L(exp.description)}</p>
+                  <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-ink-2">{L(exp.description)}</p>
                   <div className="mt-4 flex flex-wrap gap-1.5">
                     {exp.tech.map((t) => (
                       <span

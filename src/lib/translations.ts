@@ -15,10 +15,11 @@ export const ui = {
       skipToContent: "Langsung ke konten",
     },
     hero: {
-      headlineStart: "Membangun website dan aplikasi web yang",
+      headlineStart: "Hi, Selamat datang",
+      headlineLineTwo: "di",
       headlineAccent: "cepat",
-      headlineEnd: " dan responsif.",
-      words: ["cepat", "modern", "andal"],
+      headlineEnd: " Saya",
+      words: ["Dunia", "Karya", "Cerita"],
       viewWork: "Lihat portofolio",
       contact: "Hubungi saya",
       findMe: "Temukan saya",
@@ -26,7 +27,7 @@ export const ui = {
     },
     about: {
       title: "Tentang saya",
-      belief: "Saya percaya produk yang bagus dimulai dari fondasi yang jujur: kode yang bisa dibaca tim, keputusan teknis yang bisa dipertanggungjawabkan, dan antarmuka yang tidak menyembunyikan sesuatu.",
+      belief: "Saya seorang Web Developer yang senang mengubah ide menjadi website dan aplikasi web yang fungsional, modern, dan mudah digunakan.",
       expertise: "Bidang keahlian",
       basedIn: "Siap Berkolaborasi",
       remoteNote:
@@ -155,10 +156,11 @@ export const ui = {
       skipToContent: "Skip to content",
     },
     hero: {
-      headlineStart: "Building websites and web apps that are",
+      headlineStart: "Hi, welcome to",
+      headlineLineTwo: "My",
       headlineAccent: "fast",
-      headlineEnd: " and responsive.",
-      words: ["fast", "modern", "reliable"],
+      headlineEnd: "",
+      words: ["World", "Project", "Story"],
       viewWork: "View portfolio",
       contact: "Contact me",
       findMe: "Find me",
@@ -166,7 +168,7 @@ export const ui = {
     },
     about: {
       title: "About me",
-      belief: "I believe great products start with an honest foundation: code the team can read, technical decisions we can stand behind, and interfaces that hide nothing.",
+      belief: "I'm a Web Developer who enjoys turning ideas into functional, modern, and easy-to-use websites and web apps.",
       expertise: "Areas of expertise",
       basedIn: "Ready to Collaborate",
       remoteNote:
@@ -299,6 +301,7 @@ export type UiDict = {
   }
   hero: {
     headlineStart: string
+    headlineLineTwo: string
     headlineAccent: string
     headlineEnd: string
     words: readonly string[]
