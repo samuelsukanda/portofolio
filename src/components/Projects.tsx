@@ -321,23 +321,6 @@ function ProjectCarousel({
         aria-hidden
       />
 
-      <button
-        type="button"
-        onClick={() => nudge(-1)}
-        aria-label={t.projects.prevCard}
-        className="absolute left-4 top-1/2 z-20 flex size-12 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface text-ink shadow-md transition-colors hover:border-accent hover:text-accent"
-      >
-        <CaretLeft size={20} weight="bold" />
-      </button>
-      <button
-        type="button"
-        onClick={() => nudge(1)}
-        aria-label={t.projects.nextCard}
-        className="absolute right-4 top-1/2 z-20 flex size-12 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-surface text-ink shadow-md transition-colors hover:border-accent hover:text-accent"
-      >
-        <CaretRight size={20} weight="bold" />
-      </button>
-
       <div
         className="relative overflow-hidden py-2"
         onPointerDown={onPointerDown}
@@ -495,13 +478,13 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         role="dialog"
         aria-modal="true"
         aria-label={`${t.projects.openDetail} ${project.title}`}
-        className="relative flex max-h-[90dvh] w-full max-w-3xl flex-col overflow-hidden rounded-modal border border-line bg-surface shadow-lg"
+        className="relative flex max-h-[90dvh] w-full max-w-xl flex-col overflow-hidden rounded-modal border border-line bg-surface shadow-lg"
         initial={{ opacity: 0, y: 32, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 24, scale: 0.97 }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="relative aspect-video shrink-0 overflow-hidden">
+        <div className="relative aspect-video shrink-0 overflow-hidden md:aspect-auto md:h-52">
           <button
             type="button"
             onClick={() => setZoomed(true)}
@@ -569,7 +552,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
           )}
         </div>
 
-        <div className="overflow-y-auto p-6 md:p-8">
+        <div className="overflow-y-auto p-6">
           <div className="flex flex-wrap items-center gap-2">
             <span className="rounded-full bg-surface-2 px-2.5 py-1 font-mono text-[11px] text-ink-2">
               {project.year}

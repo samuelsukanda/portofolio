@@ -514,30 +514,30 @@ export type Faq = { q: LocaleString; a: LocaleString }
 
 export const faqs: Faq[] = [
   {
-    q: { id: "Apakah Anda tersedia untuk proyek?", en: "Are you available for projects?" },
+    q: { id: "Bisa bekerja sama untuk proyek baru?", en: "Are you available for projects?" },
     a: {
-      id: "Ya, saya terbuka untuk proyek freelance, remote, maupun on-site. Hubungi saya lewat email atau WhatsApp untuk mendiskusikan kebutuhan Anda.",
+      id: "Tentu. Saya terbuka untuk berbagai kebutuhan pengembangan website dan aplikasi web. Silakan hubungi saya untuk berdiskusi.",
       en: "Yes, I'm open to freelance, remote, and on-site projects. Reach out via email or WhatsApp to discuss your needs.",
     },
   },
   {
-    q: { id: "Teknologi apa saja yang Anda kuasai?", en: "What technologies do you use?" },
+    q: { id: "Teknologi apa yang Anda gunakan?", en: "What technologies do you use?" },
     a: {
-      id: "Saya fokus di ekosistem Laravel untuk backend serta React, TypeScript, dan Tailwind CSS untuk frontend, didukung MySQL, PostgreSQL, Redis, dan Linux untuk infrastruktur.",
+      id: "Saya menggunakan Laravel dan PHP untuk backend, React dan JavaScript untuk frontend, serta MySQL, PostgreSQL, Redis, Docker, dan Linux untuk mendukung pengembangan dan deployment.",
       en: "I focus on Laravel for the backend and React, TypeScript, and Tailwind CSS for the frontend, backed by MySQL, PostgreSQL, Redis, and Linux for infrastructure.",
     },
   },
   {
-    q: { id: "Berapa lama waktu pengerjaan sebuah website?", en: "How long does building a website take?" },
+    q: { id: "Berapa lama proses pengerjaan website?", en: "How long does building a website take?" },
     a: {
-      id: "Bergantung pada cakupan. Landing page atau company profile umumnya 1–2 minggu, sedangkan aplikasi web dengan fitur kompleks bisa 4–8 minggu atau lebih.",
+      id: "Waktu pengerjaan menyesuaikan kebutuhan dan kompleksitas fitur. Website sederhana dapat selesai dalam beberapa minggu, sementara aplikasi web membutuhkan waktu lebih lama.",
       en: "It depends on scope. Landing pages or company profiles usually take 1–2 weeks, while web apps with complex features can take 4–8 weeks or more.",
     },
   },
   {
-    q: { id: "Apakah Anda menyediakan layanan maintenance?", en: "Do you offer maintenance services?" },
+    q: { id: "Apakah tersedia layanan maintenance?", en: "Do you offer maintenance services?" },
     a: {
-      id: "Ya. Saya menyediakan perbaikan bug, pembaruan keamanan, optimasi performa, dan penambahan fitur untuk menjaga aplikasi tetap stabil.",
+      id: "Ya, saya dapat membantu perbaikan bug, optimasi performa, pembaruan sistem, serta pengembangan fitur untuk menjaga aplikasi tetap optimal.",
       en: "Yes. I provide bug fixes, security updates, performance optimization, and feature enhancements to keep your app stable.",
     },
   },

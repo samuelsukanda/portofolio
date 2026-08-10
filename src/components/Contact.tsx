@@ -100,11 +100,18 @@ export function Contact() {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(profile.email)
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 2000)
     } catch {
-      /* clipboard unavailable */
+      const textarea = document.createElement("textarea")
+      textarea.value = profile.email
+      textarea.style.position = "fixed"
+      textarea.style.opacity = "0"
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand("copy")
+      textarea.remove()
     }
+    setCopied(true)
+    window.setTimeout(() => setCopied(false), 2000)
   }
 
   const validate = () => {

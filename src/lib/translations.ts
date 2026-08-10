@@ -88,7 +88,7 @@ export const ui = {
       eyebrow: "FAQ",
       title: "Pertanyaan yang Sering Diajukan",
       description:
-        "Jawaban singkat atas pertanyaan umum seputar layanan, teknologi, dan cara kerja saya.",
+        "Jawaban singkat seputar layanan, teknologi, dan proses kerja saya.",
     },
     testimonials: {
       eyebrow: "Testimoni",
