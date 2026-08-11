@@ -543,7 +543,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                     aria-label={`${t.projects.viewScreenshot} ${i + 1}`}
                     onClick={() => setSlide(i)}
                     className={`h-1.5 rounded-full transition-all ${
-                      i === slide ? "w-6 bg-white" : "w-1.5 bg-white/50"
+                      i === slide ? "w-6 bg-emerald-400" : "w-1.5 bg-emerald-400/40"
                     }`}
                   />
                 ))}
@@ -728,9 +728,10 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
               <>
                 <button
                   type="button"
-                  onClick={() =>
+                  onClick={(e) => {
+                    e.stopPropagation()
                     setSlide((s) => (s - 1 + project.screenshots.length) % project.screenshots.length)
-                  }
+                  }}
                   aria-label={t.projects.prevScreenshot}
                   className="absolute left-4 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
                 >
@@ -738,7 +739,10 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                 </button>
                 <button
                   type="button"
-                  onClick={() => setSlide((s) => (s + 1) % project.screenshots.length)}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setSlide((s) => (s + 1) % project.screenshots.length)
+                  }}
                   aria-label={t.projects.nextScreenshot}
                   className="absolute right-4 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
                 >
