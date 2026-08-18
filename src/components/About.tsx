@@ -3,6 +3,7 @@ import { capabilities } from "../lib/data"
 import { useLang } from "../lib/i18n"
 import { Reveal, RevealItem } from "./Reveal"
 import { CountUp } from "./CountUp"
+import { ScrubText } from "./ScrubText"
 import { useSectionReveal } from "../lib/useSectionReveal"
 
 export function About() {
@@ -22,7 +23,9 @@ export function About() {
             <h2 className="text-3xl font-semibold tracking-tight md:text-4xl lg:text-5xl">
               {t.about.title}
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-ink-2">{t.about.belief}</p>
+            <ScrubText className="mt-5 text-lg leading-relaxed text-ink-2">
+              {t.about.belief}
+            </ScrubText>
           </RevealItem>
         </Reveal>
 

@@ -8,6 +8,8 @@ import {
   useScroll,
   useTransform,
 } from "motion/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { ArrowDownRight, ArrowUpRight, ArrowRight } from "@phosphor-icons/react"
 import { profile } from "../lib/data"
 import { useLang } from "../lib/i18n"
@@ -15,12 +17,15 @@ import { Tooltip } from "./Tooltip"
 import { BlurImage } from "./BlurImage"
 import { ParticleGrid } from "./ParticleGrid"
 
+gsap.registerPlugin(ScrollTrigger)
+
 const ease = [0.16, 1, 0.3, 1] as const
 
 export function Hero() {
   const reduce = useReducedMotion()
   const { t } = useLang()
   const sectionRef = useRef<HTMLElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
 
   const mx = useMotionValue(50)
   const my = useMotionValue(50)
@@ -35,6 +40,28 @@ export function Hero() {
   const cardY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 80])
   const glowY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 120])
   const scrollOpacity = useTransform(scrollY, [0, 240], [1, 0])
+
+  useEffect(() => {
+    if (reduce || !cardRef.current) return
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        cardRef.current,
+        { scale: 0.82, opacity: 0.6 },
+        {
+          scale: 1,
+          opacity: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom 35%",
+            scrub: 0.6,
+          },
+        },
+      )
+    })
+    return () => ctx.revert()
+  }, [reduce])
 
   const handleMove = (e: React.MouseEvent) => {
     const rect = sectionRef.current?.getBoundingClientRect()
@@ -144,13 +171,15 @@ export function Hero() {
         </motion.div>
 
         <motion.div className="relative lg:col-span-5" style={{ y: cardY }}>
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease }}
-          >
-            <ProfileCard />
-          </motion.div>
+          <div ref={cardRef}>
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 32 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease }}
+            >
+              <ProfileCard />
+            </motion.div>
+          </div>
         </motion.div>
       </div>
 

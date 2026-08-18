@@ -1,6 +1,7 @@
 import { Fragment } from "react"
 import { motion } from "motion/react"
 import { useLang } from "../lib/i18n"
+import { ScrubText } from "./ScrubText"
 
 type Tone = "blue" | "emerald" | "violet" | "amber" | "rose"
 
@@ -77,9 +78,9 @@ export function SectionHeading({
         ))}
       </h2>
       {description && (
-        <motion.p variants={fade} className="mt-4 text-base leading-relaxed text-ink-2">
+        <ScrubText className="mt-4 text-base leading-relaxed text-ink-2">
           {description}
-        </motion.p>
+        </ScrubText>
       )}
     </motion.div>
   )
